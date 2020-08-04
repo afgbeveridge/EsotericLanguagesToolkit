@@ -1,0 +1,6 @@
+
+[*]
+
+# Microsoft .NET properties
+csharp_style_expression_bodied_constructors=true:none
+csharp_style_expression_bodied_methods=true:none
