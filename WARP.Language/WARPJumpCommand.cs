@@ -1,12 +1,14 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Interpreter.Abstractions;
 
 namespace WARP.Language {
         internal class WARPJumpCommand : WARPCommand {
                 internal static Regex LabelExpression;
 
-                internal override void Execute(InterpreterState state, SourceCode source, BaseInterpreterStack stack) {
+                internal override async Task ExecuteAsync(InterpreterState state, SourceCode source,
+                        BaseInterpreterStack stack) {
                         var result = PropertyNameAndExpression(stack);
                         var env = Environment(state);
                         var val = (WARPObjectFactory.Instance.KnowsAbout(result.PropertyName)
@@ -14,7 +16,7 @@ namespace WARP.Language {
                                 : (WARPObject) env[result.PropertyName]).AsNumeric(0L);
                         if (val > 0) {
                                 if (!env.HasScratchPadEntry(result.Expression.AsString()))
-                                        FindAllLabels(state);
+                                        await FindAllLabels(state);
                                 ExecutionSupport.Assert(env.HasScratchPadEntry(result.Expression.AsString()),
                                         string.Concat("Unknown label: ", result.Expression.AsString()));
                                 source.SourcePosition =
@@ -23,7 +25,7 @@ namespace WARP.Language {
                         }
                 }
 
-                private void FindAllLabels(InterpreterState state) {
+                private async Task FindAllLabels(InterpreterState state) {
                         var more = true;
                         var code = state.GetSource<SimpleSourceCode>();
                         var pos = code.SourcePosition.Copy();
@@ -34,11 +36,11 @@ namespace WARP.Language {
                                         code.Seek(targetChar);
                                         more = code.More() && code.Current() == Constants.KeyWords.Label;
                                         if (more)
-                                                Gather(state, Constants.KeyWords.Label,
+                                                await Gather(state, Constants.KeyWords.Label,
                                                         Builder.Create(
                                                                 (stat, src, st) =>
-                                                                        new WARPLabelCommand().Execute(stat, src, st),
-                                                                WARPLabelCommand.SimpleLabel)).Apply(state);
+                                                                        new WARPLabelCommand().ExecuteAsync(stat, src, st),
+                                                                WARPLabelCommand.SimpleLabel)).ApplyAsync(state);
                                 }
                         } while (more);
 

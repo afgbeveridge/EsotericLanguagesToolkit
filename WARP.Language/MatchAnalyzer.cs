@@ -45,7 +45,7 @@ namespace WARP.Language {
                                 var expr = m.Groups["expr"].Value;
                                 var helper = AnalysisHelpers.FirstOrDefault(t => t.Item1 == cmd) ??
                                              AnalysisHelpers.First(t => t.Item1.Contains(expr.Substring(0, 1)));
-                                RealizedObject = new WARPObject(helper.Item2(state, expr));
+                                RealizedObject = new WARPObject(state.KnownRadix(), helper.Item2(state, expr));
                         }
 
                         return this;

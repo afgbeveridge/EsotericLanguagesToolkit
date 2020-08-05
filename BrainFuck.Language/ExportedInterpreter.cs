@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Threading.Tasks;
 using Common;
 using Interpreter.Abstractions;
 
@@ -6,9 +7,9 @@ namespace BrainFuck.Language {
         public class ExportedInterpreter : IEsotericInterpreter {
                 private const int StandardMaxCellCount = 30000;
 
-                public void Interpret(IOWrapper wrapper, string[] src) =>
-                        new BasicInterpreter<SimpleSourceCode, RandomAccessStack<CanonicalNumber>>()
-                                .Execute(typeof(CommandBuilder).GetTypeInfo().Assembly, src,
+                public async Task InterpretAsync(IOWrapper wrapper, string[] src) =>
+                        await new BasicInterpreter<SimpleSourceCode, RandomAccessStack<CanonicalNumber>>()
+                                .ExecuteAsync(typeof(CommandBuilder).GetTypeInfo().Assembly, src,
                                         interp => {
                                                 var env = interp.State
                                                         .GetExecutionEnvironment<RandomAccessStack<CanonicalNumber>>();

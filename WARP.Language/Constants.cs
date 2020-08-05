@@ -1,8 +1,10 @@
 ﻿namespace WARP.Language {
         public class Constants {
+
                 public const string RASName = "__RAS";
                 public const string CurrentBase = "__CIB";
                 public const string Builder = "__BLDR";
+                public const string CurrentRadix = "__RADIX";
 
                 internal class KeyWords {
                         internal const string Comparison = ":";

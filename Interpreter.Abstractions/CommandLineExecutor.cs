@@ -140,7 +140,7 @@ namespace Interpreter.Abstractions {
                                         StepInto();
                                 }
                                 else {
-                                        result = Interpreter.Execute();
+                                        result = Interpreter.ExecuteAsync().Result;
                                         if (result == InterpreterResult.BreakpointReached) Interpreter.StepMode = true;
                                 }
                 }
@@ -183,8 +183,7 @@ namespace Interpreter.Abstractions {
                         });
 
                 private void Step() {
-                        while (Interpreter.Step() && Interact()) ;
-
+                        while (Interpreter.StepAsync().Result && Interact()) ;
                         Interpreter.StepMode = false;
                 }
 

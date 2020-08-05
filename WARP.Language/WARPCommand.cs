@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Dynamic;
+using System.Threading.Tasks;
 using Interpreter.Abstractions;
 
 namespace WARP.Language {
         internal abstract class WARPCommand {
-                internal abstract void Execute(InterpreterState state, SourceCode code, BaseInterpreterStack stack);
+                internal abstract Task ExecuteAsync(InterpreterState state, SourceCode code, BaseInterpreterStack stack);
 
                 internal static dynamic PropertyNameAndExpression(BaseInterpreterStack stack) {
                         dynamic result = new ExpandoObject();
@@ -26,7 +27,7 @@ namespace WARP.Language {
                                                 cmd.ExecutionContext.Enqueue(o);
                                 };
                                 pushIfNonEmpty(a.RealizedObject);
-                                pushIfNonEmpty(new WARPObject(a.PropertyName));
+                                pushIfNonEmpty(new WARPObject(state.KnownRadix(), a.PropertyName));
                                 ExecutionSupport.Emit(() => string.Concat("Command input parsed: ", a.Source));
                         }
 

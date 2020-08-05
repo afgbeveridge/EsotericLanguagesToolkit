@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Common;
 
 namespace Interpreter.Abstractions {
@@ -43,26 +44,25 @@ namespace Interpreter.Abstractions {
                         (state, source, stack) =>
                                 stack.Push(stack.Pop<CanonicalNumber>() == stack.Pop<CanonicalNumber>());
 
-                public static Action<InterpreterState, TSourceType, TExeType> OutputValueFromStack<TSourceType,
-                        TExeType>()
+                public static Func<InterpreterState, TSourceType, TExeType, Task> OutputValueFromStack<TSourceType,
+                        TExeType>(Func<IOWrapper> wrapper)
                         where TSourceType : SourceCode
                         where TExeType : BaseInterpreterStack =>
-                        (state, source, stack) => Console.Write(stack.Pop<CanonicalNumber>().Value);
+                        async (state, source, stack) => await wrapper().WriteAsync(stack.Pop<CanonicalNumber>().Value.ToString()); // TODO: Check is correct
 
-                public static Action<InterpreterState, TSourceType, TExeType> OutputCharacterFromStack<TSourceType,
-                        TExeType>(Func<IOWrapper> wrapper = null)
+                public static Func<InterpreterState, TSourceType, TExeType, Task> OutputCharacterFromStack<TSourceType,
+                        TExeType>(Func<IOWrapper> wrapper)
                         where TSourceType : SourceCode
                         where TExeType : BaseInterpreterStack =>
-                        (state, source, stack) =>
-                                Console.Write(new string(Convert.ToChar(stack.Pop<CanonicalNumber>().Value), 1));
+                        async (state, source, stack) =>
+                                await wrapper().WriteAsync(new string(Convert.ToChar(stack.Pop<CanonicalNumber>().Value), 1));
 
-                public static Action<InterpreterState, TSourceType, TExeType> ReadValueAndPush<TSourceType, TExeType>(
-                        bool readLine = false)
+                public static Func<InterpreterState, TSourceType, TExeType, Task> ReadValueAndPush<TSourceType, TExeType>(Func<IOWrapper> wrapper, bool readLine = false)
                         where TSourceType : SourceCode
                         where TExeType : BaseInterpreterStack =>
-                        (state, source, stack) =>
+                        async (state, source, stack) =>
                                 stack.Push(readLine
-                                        ? new CanonicalNumber(Console.ReadLine())
-                                        : new CanonicalNumber(Console.Read()));
+                                        ? new CanonicalNumber(await wrapper().ReadStringAsync())
+                                        : new CanonicalNumber((int) await wrapper().ReadCharacterAsync()));
         }
 }

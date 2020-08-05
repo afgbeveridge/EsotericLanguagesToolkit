@@ -9,14 +9,16 @@ namespace WARP.Language {
                         new Dictionary<string, Func<InterpreterState, WARPObject>>();
 
                 static WARPObjectFactory() {
-                        Handlers["."] = s => WARPObject.Mutate("1");
+                        Handlers["."] = s => WARPObject.Mutate(KnownRadix(s), "1");
                         Handlers["_"] = s =>
-                                WARPObject.Mutate(s.Stack<PropertyBasedExecutionEnvironment>().Size.ToString());
-                        Handlers["~"] = s => WARPObject.Mutate(s.Source().Content.Sum(l => l.Length).ToString());
+                                WARPObject.Mutate(KnownRadix(s), s.Stack<PropertyBasedExecutionEnvironment>().Size.ToString());
+                        Handlers["~"] = s => WARPObject.Mutate(KnownRadix(s), s.Source().Content.Sum(l => l.Length).ToString());
                         Handlers["!"] = s =>
-                                WARPObject.Mutate(s.Stack<PropertyBasedExecutionEnvironment>().Pop<WARPObject>()
+                                WARPObject.Mutate(KnownRadix(s), s.Stack<PropertyBasedExecutionEnvironment>().Pop<WARPObject>()
                                         .AsString());
                 }
+
+                private static int KnownRadix(InterpreterState state) => state.KnownRadix();
 
                 private WARPObjectFactory() { }
 

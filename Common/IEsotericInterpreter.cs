@@ -1,4 +1,6 @@
-﻿namespace Common {
+﻿using System.Threading.Tasks;
+
+namespace Common {
         public interface IEsotericInterpreter {
                 string Language { get; }
 
@@ -6,6 +8,6 @@
 
                 string Url { get; }
 
-                void Interpret(IOWrapper wrapper, string[] src);
+                Task InterpretAsync(IOWrapper wrapper, string[] src);
         }
 }

@@ -23,46 +23,46 @@ namespace WARP.Language {
                         Commands["="] =
                                 Builder.Create(
                                         (state, source, stack) =>
-                                                Get<WARPAssignmentCommand>().Execute(state, source, stack),
+                                                Get<WARPAssignmentCommand>().ExecuteAsync(state, source, stack),
                                         BoundVariableExpression);
                         Commands[Constants.KeyWords.Addition] = Builder.Create(
                                 (state, source, stack) =>
                                         CreateMathProcessor((cur, expr) => cur + expr.AsNumeric(),
-                                                Constants.KeyWords.Addition).Execute(state, source, stack),
+                                                Constants.KeyWords.Addition).ExecuteAsync(state, source, stack),
                                 BoundVariableOrStackExpression);
                         Commands[Constants.KeyWords.Subtraction] = Builder.Create(
                                 (state, source, stack) =>
                                         CreateMathProcessor((cur, expr) => cur - expr.AsNumeric(),
-                                                Constants.KeyWords.Subtraction).Execute(state, source, stack),
+                                                Constants.KeyWords.Subtraction).ExecuteAsync(state, source, stack),
                                 BoundVariableOrStackExpression);
                         Commands[Constants.KeyWords.Multiplication] = Builder.Create(
                                 (state, source, stack) =>
                                         CreateMathProcessor((cur, expr) => cur * expr.AsNumeric(1L),
-                                                Constants.KeyWords.Multiplication).Execute(state, source, stack),
+                                                Constants.KeyWords.Multiplication).ExecuteAsync(state, source, stack),
                                 BoundVariableOrStackExpression);
                         Commands[Constants.KeyWords.Division] = Builder.Create(
                                 (state, source, stack) =>
                                         CreateMathProcessor((cur, expr) => cur / expr.AsNumeric(1L),
-                                                Constants.KeyWords.Division).Execute(state, source, stack),
+                                                Constants.KeyWords.Division).ExecuteAsync(state, source, stack),
                                 BoundVariableOrStackExpression);
                         Commands[Constants.KeyWords.Modulo] = Builder.Create(
                                 (state, source, stack) =>
                                         CreateMathProcessor((cur, expr) => cur % expr.AsNumeric(1L),
-                                                Constants.KeyWords.Modulo).Execute(state, source, stack),
+                                                Constants.KeyWords.Modulo).ExecuteAsync(state, source, stack),
                                 BoundVariableOrStackExpression);
                         Commands[Constants.KeyWords.Pop] = Builder.Create((state, source, stack) => stack.Pop());
                         Commands["*"] = Builder.Create((state, source, stack) => stack.Push(stack.Pop<WARPObject>()),
                                 Expression);
                         Commands[";"] = Builder.Create((state, source, stack) => stack.Duplicate());
                         Commands["+"] = Builder.Create(
-                                (state, source, stack) => WARPObject.CurrentRadix =
+                                (state, source, stack) => state.GetExecutionEnvironment<PropertyBasedExecutionEnvironment>().ScratchPad[Constants.CurrentRadix] =
                                         Convert.ToInt32(stack.Pop<WARPObject>().AsNumeric()),
                                 RegexBuilder.New().StartCaptureGroup("expr").AddCharacterClass("0-9A-Z").OneOrMore()
                                         .EndCaptureGroup().EndMatching().ToRegex());
                         Commands["]"] =
                                 Builder.Create(
                                         (state, source, stack) =>
-                                                Get<WARPPopPushCommand>().Execute(state, source, stack), Expression);
+                                                Get<WARPPopPushCommand>().ExecuteAsync(state, source, stack), Expression);
                         Commands[")"] =
                                 Builder.Create(
                                         (state, source, stack) => Wrapper.WriteAsync(stack.Pop<WARPObject>().AsString()
@@ -73,7 +73,7 @@ namespace WARP.Language {
                                                 Wrapper.WriteAsync(stack.Pop<WARPObject>().AsCharacter()), Expression);
                         Commands[","] = Builder.Create(
                                 (state, source, stack) => Get<WARPInputCommand>().WithWrapper(Wrapper)
-                                        .Execute(state, source, stack),
+                                        .ExecuteAsync(state, source, stack),
                                 RegexBuilder.New().StartsWith().StartCaptureGroup("var")
                                         .OneFrom(WARPInputCommand.Options).EndCaptureGroup().EndMatching().ToRegex());
                         Commands["|"] = Builder.Create((state, source, stack) =>
@@ -81,29 +81,29 @@ namespace WARP.Language {
                         Commands["'"] = Builder.Create((state, source, stack) =>
                                 state.RotateExecutionEnvironment<PropertyBasedExecutionEnvironment>());
                         Commands[Constants.KeyWords.Label] = Builder.Create(
-                                (state, source, stack) => Get<WARPLabelCommand>().Execute(state, source, stack),
+                                (state, source, stack) => Get<WARPLabelCommand>().ExecuteAsync(state, source, stack),
                                 WARPLabelCommand.SimpleLabel);
                         Commands[Constants.KeyWords.Jump] = Builder.Create(
-                                (state, source, stack) => Get<WARPJumpCommand>().Execute(state, source, stack),
+                                (state, source, stack) => Get<WARPJumpCommand>().ExecuteAsync(state, source, stack),
                                 WARPJumpCommand.LabelExpression);
                         Commands["%"] =
                                 Builder.Create(
                                         (state, source, stack) =>
-                                                Get<WARPTreatmentCommand>().Execute(state, source, stack),
+                                                Get<WARPTreatmentCommand>().ExecuteAsync(state, source, stack),
                                         ObjectReference);
                         Commands["?"] =
                                 Builder.Create(
                                         (state, source, stack) =>
-                                                Get<WARPDecisionCommand>().Execute(state, source, stack), Expression);
+                                                Get<WARPDecisionCommand>().ExecuteAsync(state, source, stack), Expression);
                         // :exp1:exp2 exp1 == exp2, push 0, exp1 < exp2 push -1, else push 1
                         Commands[Constants.KeyWords.Comparison] = Builder.Create(
-                                (state, source, stack) => Get<WARPComparisonCommand>().Execute(state, source, stack),
+                                (state, source, stack) => Get<WARPComparisonCommand>().ExecuteAsync(state, source, stack),
                                 Expression);
                         // Treat an object as an array, take an element and push
                         Commands["{"] = Builder.Create((state, source, stack) =>
                                         CommandFactory
                                                 .Get(() => new WARPRASCommand((st, stk) => stk.Push(st.CurrentCell)),
-                                                        "_").Execute(state, source, stack)
+                                                        "_").ExecuteAsync(state, source, stack)
                                 , RegexBuilder.New().StartsWith().Include("expression").EndMatching().ToRegex());
                         // Treat an object as an array, update the object noted at the index given with a value popped from the stack
                         Commands["}"] = Builder.Create((state, source, stack) =>
@@ -111,7 +111,7 @@ namespace WARP.Language {
                                                 .Get(
                                                         () => new WARPRASCommand((st, stk) =>
                                                                 st.CurrentCell = stk.Pop<WARPObject>()), ":")
-                                                .Execute(state, source, stack),
+                                                .ExecuteAsync(state, source, stack),
                                 RegexBuilder.New().StartsWith().Include("expression").EndMatching().ToRegex());
                 }
 

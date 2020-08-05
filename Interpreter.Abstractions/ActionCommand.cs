@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Interpreter.Abstractions {
-        public class ActionCommand<TStack> : BaseCommand<Action<InterpreterState, SourceCode, TStack>>
+        public class ActionCommand<TStack> : BaseCommand<Func<InterpreterState, SourceCode, TStack, Task>>
                 where TStack : BaseInterpreterStack {
-                public ActionCommand(Action<InterpreterState, SourceCode, TStack> cmd, string keyWord)
+                public ActionCommand(Func<InterpreterState, SourceCode, TStack, Task> cmd, string keyWord)
                         : base(cmd, keyWord) =>
                         ExecutionContext = new Queue<BaseObject>();
 
                 public Queue<BaseObject> ExecutionContext { get; }
 
-                protected override void Interpret(InterpreterState state) {
+                protected override async Task InterpretAsync(InterpreterState state) {
                         foreach (var obj in ExecutionContext) state.Stack<TStack>().Push(obj);
 
-                        Command(state, state.GetSource<SourceCode>(), state.GetExecutionEnvironment<TStack>());
+                        await Command(state, state.GetSource<SourceCode>(), state.GetExecutionEnvironment<TStack>());
                         Record();
                 }
 

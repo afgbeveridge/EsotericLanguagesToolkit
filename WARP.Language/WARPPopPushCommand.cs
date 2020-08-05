@@ -1,11 +1,13 @@
-﻿using Interpreter.Abstractions;
+﻿using System.Threading.Tasks;
+using Interpreter.Abstractions;
 
 namespace WARP.Language {
         internal class WARPPopPushCommand : WARPCommand {
-                internal override void Execute(InterpreterState state, SourceCode code, BaseInterpreterStack stack) {
+                internal override Task ExecuteAsync(InterpreterState state, SourceCode code, BaseInterpreterStack stack) {
                         var obj = stack.Pop();
                         stack.Pop();
                         stack.Push(obj);
+                        return Task.CompletedTask;
                 }
         }
 }

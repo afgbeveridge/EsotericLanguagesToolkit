@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using Interpreter.Abstractions;
 
-namespace Deadfish.Language {
-
-        internal class DeadfishCommand : BaseCommand<
+namespace BrainFuck.Language {
+        internal class
+                BrainFuckCommand : BaseCommand<
                         Func<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>, Task>> {
-                internal DeadfishCommand(
+                internal BrainFuckCommand(
                         Func<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>, Task> cmd,
                         string keyWord)
                         : base(cmd, keyWord) { }
@@ -15,6 +15,6 @@ namespace Deadfish.Language {
                         state.GetSource<SimpleSourceCode>(),
                         state.GetExecutionEnvironment<RandomAccessStack<CanonicalNumber>>());
 
-                public override object Clone() => new DeadfishCommand(Command, KeyWord);
+                public override object Clone() => new BrainFuckCommand(Command, KeyWord);
         }
 }

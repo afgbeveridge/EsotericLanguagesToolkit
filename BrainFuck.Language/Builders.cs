@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Common;
 using Interpreter.Abstractions;
 
@@ -23,38 +24,42 @@ namespace BrainFuck.Language {
                 private const char EndConditional = ']';
 
                 private readonly
-                        Dictionary<char, Action<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>>>
+                        Dictionary<char, Func<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>, Task>>
                         Commands =
-                                new Dictionary<char, Action<InterpreterState, SimpleSourceCode,
-                                        RandomAccessStack<CanonicalNumber>>>();
+                                new Dictionary<char, Func<InterpreterState, SimpleSourceCode,
+                                        RandomAccessStack<CanonicalNumber>, Task>>();
 
                 public CommandBuilder() => Initialize();
 
                 public IOWrapper Wrapper { get; set; }
 
+                private Task WrapAsAsync(Action a) {
+                        a();
+                        return Task.CompletedTask;
+                }
+
                 internal void Initialize() {
-                        Commands['>'] = (state, source, stack) => stack.Advance();
-                        Commands['<'] = (state, source, stack) => stack.Retreat();
-                        Commands['+'] = (state, source, stack) =>
-                                stack.CurrentCell = stack.CurrentCell + new CanonicalNumber(1);
-                        Commands['-'] = (state, source, stack) =>
-                                stack.CurrentCell = stack.CurrentCell + new CanonicalNumber(-1);
-                        Commands['.'] = (state, source, stack) =>
-                                Wrapper.WriteAsync(new string(Convert.ToChar(stack.CurrentCell.Value), 1));
-                        Commands[','] = (state, source, stack) =>
-                                stack.CurrentCell.Value = Wrapper.ReadCharacterAsync().Result;
-                        Commands[StartConditional] = (state, source, stack) => {
-                                if (stack.CurrentCell.Value > 0) {
-                                        source.Advance();
-                                }
-                                else {
-                                        source.Seek(EndConditional, SeekDirection.Forward, StartConditional);
-                                        source.Advance();
-                                }
-                        };
-                        Commands[EndConditional] = (state, source, stack) => {
-                                source.Seek(StartConditional, SeekDirection.Backward, EndConditional);
-                        };
+                        Commands['>'] = async (state, source, stack) => await WrapAsAsync(() => stack.Advance());
+                        Commands['<'] = async (state, source, stack) => await WrapAsAsync(() => stack.Retreat());
+                        Commands['+'] = async (state, source, stack) =>
+                                await WrapAsAsync(() => stack.CurrentCell = stack.CurrentCell + new CanonicalNumber(1));
+                        Commands['-'] = async (state, source, stack) =>
+                                await WrapAsAsync(() => stack.CurrentCell = stack.CurrentCell + new CanonicalNumber(-1));
+                        Commands['.'] = async (state, source, stack) =>
+                                await Wrapper.WriteAsync(new string(Convert.ToChar(stack.CurrentCell.Value), 1));
+                        Commands[','] = async (state, source, stack) => stack.CurrentCell.Value = await Wrapper.ReadCharacterAsync();
+                        Commands[StartConditional] = async (state, source, stack) =>
+                                await WrapAsAsync(() => {
+                                        if (stack.CurrentCell.Value > 0) {
+                                                source.Advance();
+                                        }
+                                        else {
+                                                source.Seek(EndConditional, SeekDirection.Forward, StartConditional);
+                                                source.Advance();
+                                        }
+                                });
+                        Commands[EndConditional] = async (state, source, stack) =>
+                                await WrapAsAsync(() => source.Seek(StartConditional, SeekDirection.Backward, EndConditional));
                 }
 
                 public override bool Applicable(InterpreterState state) =>
@@ -74,36 +79,5 @@ namespace BrainFuck.Language {
                                 state.GetSource<SourceCode>().SourcePosition));
                         return new BrainFuckCommand(Commands[key], key.ToString());
                 }
-        }
-
-
-        public class
-                UnknownCommandSkipper : TrivialInterpreterBase<SimpleSourceCode, RandomAccessStack<CanonicalNumber>> {
-                public override bool Applicable(InterpreterState state) {
-                        var bldr = state.GetExecutionEnvironment<RandomAccessStack<CanonicalNumber>>()
-                                .ScratchPadAs<CommandBuilder>(Constants.Builder);
-                        return !bldr.Applicable(state.BaseSourceCode.CurrentCharacter());
-                }
-
-                public override BaseObject Gather(InterpreterState state) {
-                        while (state.BaseSourceCode.More() && Applicable(state))
-                                state.BaseSourceCode.Advance();
-                        return NullObject.Instance;
-                }
-        }
-
-        internal class
-                BrainFuckCommand : BaseCommand<
-                        Action<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>>> {
-                internal BrainFuckCommand(
-                        Action<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>> cmd,
-                        string keyWord)
-                        : base(cmd, keyWord) { }
-
-                protected override void Interpret(InterpreterState state) => Command(state,
-                        state.GetSource<SimpleSourceCode>(),
-                        state.GetExecutionEnvironment<RandomAccessStack<CanonicalNumber>>());
-
-                public override object Clone() => new BrainFuckCommand(Command, KeyWord);
         }
 }

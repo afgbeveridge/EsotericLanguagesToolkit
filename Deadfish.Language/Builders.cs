@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Common;
 using Interpreter.Abstractions;
 
@@ -22,19 +23,22 @@ namespace Deadfish.Language {
                 internal const string IOWrapperKey = "__";
 
                 private readonly
-                        Dictionary<char, Action<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>>>
+                        Dictionary<char, Func<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>, Task>>
                         Commands =
-                                new Dictionary<char, Action<InterpreterState, SimpleSourceCode,
-                                        RandomAccessStack<CanonicalNumber>>>();
+                                new Dictionary<char, Func<InterpreterState, SimpleSourceCode,
+                                        RandomAccessStack<CanonicalNumber>, Task>>();
 
                 public CommandBuilder() => Initialize();
 
                 public IOWrapper Wrapper { get; set; }
 
-                private static void ResetIfNecessary(RandomAccessStack<CanonicalNumber> stack, Action a) {
+                private static async Task ResetIfNecessary(RandomAccessStack<CanonicalNumber> stack, Action a = null, Func<Task> f = null) {
                         var cur = stack.CurrentCell.Value;
                         if (cur == 256 || cur < 0) stack.CurrentCell.Value = 0;
-                        a();
+                        if (a != null)
+                                a();
+                        else 
+                                await f();
                 }
 
                 internal void Initialize() {
@@ -45,7 +49,7 @@ namespace Deadfish.Language {
                         Commands['s'] = (state, source, stack) =>
                                 ResetIfNecessary(stack, () => stack.CurrentCell.Value *= stack.CurrentCell.Value);
                         Commands['o'] = (state, source, stack) => ResetIfNecessary(stack,
-                                () => Wrapper.WriteAsync(stack.CurrentCell.Value.ToString()));
+                                f: () => Wrapper.WriteAsync(stack.CurrentCell.Value.ToString()));
                 }
 
                 public override bool Applicable(InterpreterState state) =>
@@ -65,3 +69,4 @@ namespace Deadfish.Language {
         }
 }
 
+ 

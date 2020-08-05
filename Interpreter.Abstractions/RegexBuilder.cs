@@ -15,15 +15,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Interpreter.Abstractions;
 
-namespace WARP.Language {
-        internal class RegexBuilder {
+namespace Interpreter.Abstractions {
+        public class RegexBuilder {
                 static RegexBuilder() => RegisteredPatterns = new Dictionary<string, string>();
 
-                internal RegexBuilder() => Builder = new StringBuilder();
+                public RegexBuilder() => Builder = new StringBuilder();
 
-                internal RegexBuilder Or => this.Fluently(() => Builder.Append("|"));
+                public RegexBuilder Or => this.Fluently(() => Builder.Append("|"));
 
                 private bool InCaptureGroup { get; set; }
 
@@ -31,52 +30,52 @@ namespace WARP.Language {
 
                 private static Dictionary<string, string> RegisteredPatterns { get; }
 
-                internal static RegexBuilder New() => new RegexBuilder();
+                public static RegexBuilder New() => new RegexBuilder();
 
-                internal RegexBuilder StartsWith() => this.Fluently(() => Builder.Append("^"));
+                public RegexBuilder StartsWith() => this.Fluently(() => Builder.Append("^"));
 
-                internal RegexBuilder StartCaptureGroup(string name) {
+                public RegexBuilder StartCaptureGroup(string name) {
                         if (InCaptureGroup) EndCaptureGroup();
                         InCaptureGroup = true;
                         return this.Fluently(() => Builder.Append("(?<").Append(name).Append(">"));
                 }
 
-                internal RegexBuilder AddCharacterClass(string expr) =>
+                public RegexBuilder AddCharacterClass(string expr) =>
                         this.Fluently(() => Builder.Append("[").Append(expr).Append("]"));
 
-                internal RegexBuilder Optional(string expr, int max = 1) =>
+                public RegexBuilder Optional(string expr, int max = 1) =>
                         this.Fluently(() => Builder.Append(expr).Append("{0,").Append(max).Append("}"));
 
-                internal RegexBuilder BoundedRepetition(int bound) =>
+                public RegexBuilder BoundedRepetition(int bound) =>
                         this.Fluently(() => Builder.Append("{").Append(bound).Append("}"));
 
-                internal RegexBuilder OneOrMore() => this.Fluently(() => Builder.Append("+"));
+                public RegexBuilder OneOrMore() => this.Fluently(() => Builder.Append("+"));
 
-                internal RegexBuilder Literal(string content) => this.Fluently(() => Builder.Append(content));
+                public RegexBuilder Literal(string content) => this.Fluently(() => Builder.Append(content));
 
-                internal RegexBuilder OneFrom(IEnumerable<string> options) =>
+                public RegexBuilder OneFrom(IEnumerable<string> options) =>
                         this.Fluently(() => Builder.Append(string.Join("|", options)));
 
-                internal RegexBuilder EndCaptureGroup() {
+                public RegexBuilder EndCaptureGroup() {
                         InCaptureGroup = false;
                         return this.Fluently(() => Builder.Append(")"));
                 }
 
-                internal RegexBuilder EndMatching() => this.Fluently(() => Builder.Append("$"));
+                public RegexBuilder EndMatching() => this.Fluently(() => Builder.Append("$"));
 
-                internal RegexBuilder RememberAs(string key) =>
+                public RegexBuilder RememberAs(string key) =>
                         this.Fluently(() => RegisteredPatterns[key] = Builder.ToString());
 
-                internal RegexBuilder Include(string key) =>
+                public RegexBuilder Include(string key) =>
                         this.Fluently(() => Builder.Append(RegisteredPatterns[key]));
 
-                internal RegexBuilder Reset() => this.Fluently(() => Builder.Length = 0);
+                public RegexBuilder Reset() => this.Fluently(() => Builder.Length = 0);
 
-                internal Regex ToRegex() {
+                public Regex ToRegex() {
                         if (InCaptureGroup) EndCaptureGroup();
                         return new Regex(Builder.ToString());
                 }
 
-                internal static Regex ToRegex(string key) => new Regex(RegisteredPatterns[key]);
+                public static Regex ToRegex(string key) => new Regex(RegisteredPatterns[key]);
         }
 }
