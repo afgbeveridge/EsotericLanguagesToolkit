@@ -8,12 +8,12 @@ namespace WARP.Language {
 
                 internal Action<InterpreterState, SourceCode, BaseInterpreterStack> Action { get; set; }
 
-                internal static Builder Null { get; } = new Builder {Action = (s, c, e) => { }};
+                internal static Builder Null { get; } = new Builder { Action = (s, c, e) => { } };
 
                 internal static Builder Create(Action<InterpreterState, SourceCode, BaseInterpreterStack> action,
-                        Regex expr = null) => new Builder {Expression = expr, Action = action};
+                        Regex expr = null) => new Builder { Expression = expr, Action = action };
 
-                internal static Builder Inactive(Regex expr) => new Builder {Expression = expr};
+                internal static Builder Inactive(Regex expr) => new Builder { Expression = expr };
 
                 internal MatchAnalyzer Examine(InterpreterState state, string key) {
                         var input = state.Source().Current();

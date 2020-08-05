@@ -3,7 +3,6 @@ using Common;
 
 namespace Interpreter.Abstractions {
         public static class CommonCommands {
-
                 private static IOWrapper DefaultWrapper = new ConsoleIOWrapper();
 
                 public static Action<InterpreterState, TSourceType, TExeType> BinaryAddition<TSourceType, TExeType>()

@@ -12,13 +12,16 @@ namespace WARP.Language {
                 static MatchAnalyzer() {
                         AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>(
                                 string.Concat("-", FlexibleNumeralSystem.CharList), (state, src) => src));
-                        AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>("@", (state, src) => src));
-                        AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>("^", (state, src) => src));
+                        AnalysisHelpers.Add(
+                                Tuple.Create<string, Func<InterpreterState, string, string>>("@", (state, src) => src));
+                        AnalysisHelpers.Add(
+                                Tuple.Create<string, Func<InterpreterState, string, string>>("^", (state, src) => src));
                         AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>("\"",
                                 (state, src) => src.Substring(1, src.Length - 2)));
                         AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>("!",
                                 (state, src) => state.Stack<BaseInterpreterStack>().Pop<WARPObject>().AsString()));
-                        AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>("abcdefghijklmnopqrstuvwxyz",
+                        AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>(
+                                "abcdefghijklmnopqrstuvwxyz",
                                 (state, src) => {
                                         var b = state.GetExecutionEnvironment<PropertyBasedExecutionEnvironment>()[src];
                                         return b == null ? string.Empty : ((WARPObject) b).AsString();

@@ -6,7 +6,7 @@ namespace Interpreter.Abstractions {
         public static class ConfigurationSupport {
                 private static readonly Dictionary<Type, Func<string, object>> Converters =
                         new Dictionary<Type, Func<string, object>> {
-                                {typeof(bool), s => Convert.ToBoolean(s)}, {typeof(int), s => Convert.ToInt32(s)}
+                                { typeof(bool), s => Convert.ToBoolean(s) }, { typeof(int), s => Convert.ToInt32(s) }
                         };
 
                 public static T ConfigurationFor<T>(string configName, T def = default) {

@@ -23,7 +23,6 @@ namespace Befunge_93 {
         //}
 
         public class CommandBuilder : TrivialInterpreterBase<SourceCodeTorus, BaseInterpreterStack> {
-
                 public const string IOWrapperKey = "__";
 
                 private static readonly Random Rand = new Random();
@@ -61,28 +60,31 @@ namespace Befunge_93 {
                                 SuppressAdvanceOnParse = true
                         };
                         Commands["@"] = new CommandBundle
-                                {Action = (state, source, stack) => source.CompletionSignalled = true};
+                                { Action = (state, source, stack) => source.CompletionSignalled = true };
                         Commands["+"] = new CommandBundle
-                                {Action = CommonCommands.BinaryAddition<SourceCodeTorus, BaseInterpreterStack>()};
+                                { Action = CommonCommands.BinaryAddition<SourceCodeTorus, BaseInterpreterStack>() };
                         Commands["-"] = new CommandBundle
-                                {Action = CommonCommands.BinarySubtraction<SourceCodeTorus, BaseInterpreterStack>()};
-                        Commands["*"] = new CommandBundle
-                                {Action = CommonCommands.BinaryMultiplication<SourceCodeTorus, BaseInterpreterStack>()};
+                                { Action = CommonCommands.BinarySubtraction<SourceCodeTorus, BaseInterpreterStack>() };
+                        Commands["*"] = new CommandBundle {
+                                Action = CommonCommands.BinaryMultiplication<SourceCodeTorus, BaseInterpreterStack>()
+                        };
                         Commands["/"] = new CommandBundle
-                                {Action = CommonCommands.Division<SourceCodeTorus, BaseInterpreterStack>()};
-                        Commands["\\"] = new CommandBundle {Action = (state, source, stack) => stack.Swap()};
-                        Commands[":"] = new CommandBundle {Action = (state, source, stack) => stack.Duplicate()};
-                        Commands["."] = new CommandBundle
-                                {Action = CommonCommands.OutputValueFromStack<SourceCodeTorus, BaseInterpreterStack>()};
+                                { Action = CommonCommands.Division<SourceCodeTorus, BaseInterpreterStack>() };
+                        Commands["\\"] = new CommandBundle { Action = (state, source, stack) => stack.Swap() };
+                        Commands[":"] = new CommandBundle { Action = (state, source, stack) => stack.Duplicate() };
+                        Commands["."] = new CommandBundle {
+                                Action = CommonCommands.OutputValueFromStack<SourceCodeTorus, BaseInterpreterStack>()
+                        };
                         Commands[","] = new CommandBundle {
                                 Action =
                                         CommonCommands.OutputCharacterFromStack<SourceCodeTorus, BaseInterpreterStack>()
                         };
-                        Commands["&"] = new CommandBundle
-                                {Action = CommonCommands.ReadValueAndPush<SourceCodeTorus, BaseInterpreterStack>(true)};
+                        Commands["&"] = new CommandBundle {
+                                Action = CommonCommands.ReadValueAndPush<SourceCodeTorus, BaseInterpreterStack>(true)
+                        };
                         Commands["~"] = new CommandBundle
-                                {Action = CommonCommands.ReadValueAndPush<SourceCodeTorus, BaseInterpreterStack>()};
-                        Commands["$"] = new CommandBundle {Action = (state, source, stack) => stack.Pop()};
+                                { Action = CommonCommands.ReadValueAndPush<SourceCodeTorus, BaseInterpreterStack>() };
+                        Commands["$"] = new CommandBundle { Action = (state, source, stack) => stack.Pop() };
                         Commands["g"] = new CommandBundle {
                                 Action = (state, source, stack) =>
                                         stack.Push(new CanonicalNumber(Convert.ToInt32(source[CreateTuple(stack)])))
@@ -91,7 +93,7 @@ namespace Befunge_93 {
                                 Action = (state, source, stack) => source[CreateTuple(stack)] =
                                         Convert.ToChar(stack.Pop<CanonicalNumber>().Value)
                         };
-                        Commands["#"] = new CommandBundle {Action = (state, source, stack) => source.Advance()};
+                        Commands["#"] = new CommandBundle { Action = (state, source, stack) => source.Advance() };
                         Commands["!"] = new CommandBundle {
                                 Action = (state, source, stack) => stack.Push(stack.Pop<CanonicalNumber>().Value != 0
                                         ? CanonicalBoolean.False
@@ -141,14 +143,14 @@ namespace Befunge_93 {
                                 }
                         };
                         Enumerable.Range(0, 10).ToList().ForEach(n => Commands[n.ToString()] = new CommandBundle
-                                {Action = (state, source, stack) => stack.Push(new CanonicalNumber(n))});
+                                { Action = (state, source, stack) => stack.Push(new CanonicalNumber(n)) });
                 }
+
+                public IOWrapper Wrapper { get; set; }
 
                 public override bool Applicable(InterpreterState state) => Applicable(state.BaseSourceCode.Current());
 
                 public static bool Applicable(string current) => Commands.ContainsKey(current);
-
-                public IOWrapper Wrapper { get; set; }
 
                 public override BaseObject Gather(InterpreterState state) {
                         var key = state.BaseSourceCode.Current();

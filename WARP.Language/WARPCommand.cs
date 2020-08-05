@@ -13,7 +13,8 @@ namespace WARP.Language {
                         return result;
                 }
 
-                internal static ActionCommand<PropertyBasedExecutionEnvironment> Gather(InterpreterState state, string key, Builder bld) {
+                internal static ActionCommand<PropertyBasedExecutionEnvironment> Gather(InterpreterState state,
+                        string key, Builder bld) {
                         ExecutionSupport.Emit(() => string.Format("Command created: {0}, Source Position {1}", key,
                                 state.Source().SourcePosition));
                         state.Source().Advance();

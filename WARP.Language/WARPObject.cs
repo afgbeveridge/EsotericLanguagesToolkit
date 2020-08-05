@@ -8,7 +8,7 @@ namespace WARP.Language {
                 public WARPObject()
                         : this(0L) { }
 
-                internal WARPObject(char src) : this(new string(new[] {src})) { }
+                internal WARPObject(char src) : this(new string(new[] { src })) { }
 
                 internal WARPObject(string src) {
                         Source = src;
@@ -32,9 +32,9 @@ namespace WARP.Language {
 
                 internal char AsCharacter() => Convert.ToChar(AsNumeric());
 
-                public override object Clone() => new WARPObject {Source = Source, Radix = Radix};
+                public override object Clone() => new WARPObject { Source = Source, Radix = Radix };
 
-                internal static WARPObject Mutate(string src) => new WARPObject {Source = src, Radix = CurrentRadix};
+                internal static WARPObject Mutate(string src) => new WARPObject { Source = src, Radix = CurrentRadix };
 
                 public override string ToString() => AsString();
         }

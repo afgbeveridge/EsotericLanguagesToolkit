@@ -50,8 +50,8 @@ namespace FalseInterpreter {
         public class SequenceBuilder : TrivialInterpreterBase<SimpleSourceCode, PropertyBasedExecutionEnvironment> {
                 private static readonly Dictionary<string, Tuple<string, bool>> SequenceDictionary =
                         new Dictionary<string, Tuple<string, bool>> {
-                                {"{", new Tuple<string, bool>("}", true)},
-                                {"\"", new Tuple<string, bool>("\"", false)}
+                                { "{", new Tuple<string, bool>("}", true) },
+                                { "\"", new Tuple<string, bool>("\"", false) }
                         };
 
                 public override bool Applicable(InterpreterState state) =>

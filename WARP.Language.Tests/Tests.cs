@@ -23,7 +23,7 @@ namespace WARP.Language.Tests {
                         WARPObject.CurrentRadix = FlexibleNumeralSystem.StandardRadix;
                         Stack().Reset();
                         State.GetExecutionEnvironment<PropertyBasedExecutionEnvironment>().ScratchPad[Constants.RASName]
-                                = new RandomAccessStack<WARPObject> {MaximumSize = 50000};
+                                = new RandomAccessStack<WARPObject> { MaximumSize = 50000 };
                         State.GetExecutionEnvironment<PropertyBasedExecutionEnvironment>().OnUnknownKey =
                                 env => new WARPObject();
                         State.GetExecutionEnvironment<PropertyBasedExecutionEnvironment>()
@@ -31,7 +31,7 @@ namespace WARP.Language.Tests {
                 }
 
                 private LanguageTest EstablishProgramSource(string code) {
-                        State.GetSource<SimpleSourceCode>().Content = new List<string> {code};
+                        State.GetSource<SimpleSourceCode>().Content = new List<string> { code };
                         return this;
                 }
 

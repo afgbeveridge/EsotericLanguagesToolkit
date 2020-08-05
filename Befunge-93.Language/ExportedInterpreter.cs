@@ -8,7 +8,8 @@ namespace Befunge_93.Language {
                         new BasicInterpreter<SourceCodeTorus, BaseInterpreterStack>()
                                 .Execute(typeof(CommandBuilder).GetTypeInfo().Assembly, src,
                                         interp => {
-                                                interp.State.GetSource<SourceCodeTorus>().Size = Constants.StandardTorusSize;
+                                                interp.State.GetSource<SourceCodeTorus>().Size =
+                                                        Constants.StandardTorusSize;
                                                 var env = interp.State.GetExecutionEnvironment<BaseInterpreterStack>();
                                                 env.Interferer = new StackInterferer();
                                                 env.ScratchPad[CommandBuilder.IOWrapperKey] = wrapper;

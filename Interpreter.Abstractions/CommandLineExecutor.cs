@@ -9,7 +9,7 @@ namespace Interpreter.Abstractions {
                 where TExeType : BaseInterpreterStack, new() {
                 // Primitive validation
 
-                private static readonly string[] SupportedDebugOptions = {null, string.Empty, "c", "n"};
+                private static readonly string[] SupportedDebugOptions = { null, string.Empty, "c", "n" };
 
                 private readonly Dictionary<string, OptionBehaviour<TSourceType, TExeType>> OptionsAndConstraints =
                         new Dictionary<string, OptionBehaviour<TSourceType, TExeType>> {
@@ -215,7 +215,7 @@ namespace Interpreter.Abstractions {
                                 if (idx == source.SourcePosition.Y) {
                                         var line = source.Content[idx];
                                         Console.Write(line.Substring(0, source.SourcePosition.X));
-                                        ConsoleHighlighter.Display(new string(new[] {line[source.SourcePosition.X]}),
+                                        ConsoleHighlighter.Display(new string(new[] { line[source.SourcePosition.X] }),
                                                 ConsoleColor.Yellow, ConsoleColor.DarkRed, false);
                                         Console.WriteLine(line.Substring(source.SourcePosition.X + 1));
                                         ConsoleHighlighter.Display(new string(' ', source.SourcePosition.X) + "^",

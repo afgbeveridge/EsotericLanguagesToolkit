@@ -31,7 +31,7 @@ namespace Eso.API.Controllers {
                         IActionResult result = NotFound();
                         if (interp != null) {
                                 var wrapper = new SelfContainedWrapper(src.Input);
-                                interp.Interpret(wrapper, new[] {src.Source});
+                                interp.Interpret(wrapper, new[] { src.Source });
                                 result = new ObjectResult(wrapper.Sink);
                         }
 

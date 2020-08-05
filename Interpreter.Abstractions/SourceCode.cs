@@ -56,7 +56,8 @@ namespace Interpreter.Abstractions {
 
                 public abstract bool More();
 
-                protected void Fire() => SourceEvent?.Invoke(this, new SourceCodeEventArgs<SourceCode> {Source = this});
+                protected void Fire() =>
+                        SourceEvent?.Invoke(this, new SourceCodeEventArgs<SourceCode> { Source = this });
         }
 
         #endregion

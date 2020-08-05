@@ -75,7 +75,7 @@ namespace FalseInterpreter {
                                                      string.Join("Child->",
                                                              Children.Select(c => c + Environment.NewLine).ToArray());
 
-                public override object Clone() => new FalseLambda {Children = new List<BaseObject>(Children)};
+                public override object Clone() => new FalseLambda { Children = new List<BaseObject>(Children) };
         }
 
         public class FalseVariable : BaseObject {

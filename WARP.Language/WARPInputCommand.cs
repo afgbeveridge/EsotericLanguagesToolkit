@@ -8,7 +8,7 @@ namespace WARP.Language {
         internal class WARPInputCommand : WARPCommand {
                 [ThreadStatic] internal static IOWrapper InteractionWrapper;
 
-                internal static readonly IEnumerable<string> Options = new[] {"l", "c"};
+                internal static readonly IEnumerable<string> Options = new[] { "l", "c" };
 
                 internal WARPInputCommand WithWrapper(IOWrapper w) {
                         InteractionWrapper = w;
