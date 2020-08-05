@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Interpreter.Abstractions;
 
 namespace Deadfish.Language {
-        internal class
-                DeadfishCommand : BaseCommand<
-                        Action<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>>> {
+
+        internal class DeadfishCommand : BaseCommand<
+                        Func<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>, Task>> {
                 internal DeadfishCommand(
-                        Action<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>> cmd,
+                        Func<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>, Task> cmd,
                         string keyWord)
                         : base(cmd, keyWord) { }
 
-                protected override void Interpret(InterpreterState state) => Command(state,
+                protected override Task InterpretAsync(InterpreterState state) => Command(state,
                         state.GetSource<SimpleSourceCode>(),
                         state.GetExecutionEnvironment<RandomAccessStack<CanonicalNumber>>());
 

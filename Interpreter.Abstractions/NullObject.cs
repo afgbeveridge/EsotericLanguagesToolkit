@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Interpreter.Abstractions {
         public class NullObject : BaseObject {
@@ -8,6 +9,6 @@ namespace Interpreter.Abstractions {
 
                 public static NullObject Instance => SoleInstance.Value;
 
-                protected override void Interpret(InterpreterState state) { }
+                protected override Task InterpretAsync(InterpreterState state) => Task.CompletedTask;
         }
 }

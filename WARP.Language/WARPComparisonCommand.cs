@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Interpreter.Abstractions;
 
 namespace WARP.Language {
         internal class WARPComparisonCommand : WARPCommand {
-                internal override void Execute(InterpreterState state, SourceCode code, BaseInterpreterStack stack) {
+                internal override Task ExecuteAsync(InterpreterState state, SourceCode code, BaseInterpreterStack stack) {
                         var obj = stack.Pop<WARPObject>();
                         var env = Environment(state);
                         if (!env.HasScratchPadEntry(Constants.KeyWords.Comparison)) {
@@ -23,6 +24,7 @@ namespace WARP.Language {
                                         ? cmp()
                                         : string.Compare(lhs.AsString(), obj.AsString())));
                         }
+                        return Task.CompletedTask;
                 }
         }
 }

@@ -44,7 +44,7 @@ namespace WARP.Language.Tests {
 
                 private LanguageTest Parse() {
                         while (State.GetSource<SimpleSourceCode>().More())
-                                Builder.Gather(State).Apply(State);
+                                Builder.Gather(State).ApplyAsync(State);
                         return this;
                 }
 

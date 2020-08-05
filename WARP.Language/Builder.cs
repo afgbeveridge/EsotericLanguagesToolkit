@@ -1,17 +1,28 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Interpreter.Abstractions;
 
 namespace WARP.Language {
         internal class Builder {
                 internal Regex Expression { get; set; }
 
-                internal Action<InterpreterState, SourceCode, BaseInterpreterStack> Action { get; set; }
+                internal Func<InterpreterState, SourceCode, BaseInterpreterStack, Task> Action { get; set; }
 
-                internal static Builder Null { get; } = new Builder { Action = (s, c, e) => { } };
+                internal static Builder Null { get; } = new Builder { Action = (s, c, e) => Task.CompletedTask };
 
                 internal static Builder Create(Action<InterpreterState, SourceCode, BaseInterpreterStack> action,
-                        Regex expr = null) => new Builder { Expression = expr, Action = action };
+                                               Regex expr = null) => 
+                        new Builder { 
+                                Expression = expr, 
+                                Action = (state, source, stack) => {
+                                 action(state, source, stack);
+                                 return Task.CompletedTask;
+                         }
+                };
+
+                internal static Builder Create(Func<InterpreterState, SourceCode, BaseInterpreterStack, Task> asyncAction,
+                        Regex expr = null) => new Builder { Expression = expr, Action = asyncAction };
 
                 internal static Builder Inactive(Regex expr) => new Builder { Expression = expr };
 

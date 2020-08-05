@@ -1,12 +1,13 @@
 ﻿using System.Reflection;
+using System.Threading.Tasks;
 using Common;
 using Interpreter.Abstractions;
 
 namespace WARP.Language {
         public class ExportedInterpreter : IEsotericInterpreter {
-                public void Interpret(IOWrapper wrapper, string[] src) =>
-                        new BasicInterpreter<SimpleSourceCode, PropertyBasedExecutionEnvironment>()
-                                .Execute(Assembly.GetExecutingAssembly(), src,
+                public async Task InterpretAsync(IOWrapper wrapper, string[] src) =>
+                        await new BasicInterpreter<SimpleSourceCode, PropertyBasedExecutionEnvironment>()
+                                .ExecuteAsync(Assembly.GetExecutingAssembly(), src,
                                         interp => {
                                                 var env = interp.State
                                                         .GetExecutionEnvironment<PropertyBasedExecutionEnvironment>();

@@ -1,13 +1,14 @@
 ﻿using System.Reflection;
+using System.Threading.Tasks;
 using Common;
 using Interpreter.Abstractions;
 
 namespace Deadfish.Language {
         public class ExportedInterpreter : IEsotericInterpreter {
-                public void Interpret(IOWrapper wrapper, string[] src) =>
-                        new BasicInterpreter<SimpleSourceCode, RandomAccessStack<CanonicalNumber>> { RetainEOL = false }
+                public async Task InterpretAsync(IOWrapper wrapper, string[] src) =>
+                        await new BasicInterpreter<SimpleSourceCode, RandomAccessStack<CanonicalNumber>> { RetainEOL = false }
                                 .IgnoreUnknownCommands()
-                                .Execute(typeof(CommandBuilder).GetTypeInfo().Assembly, src,
+                                .ExecuteAsync(typeof(CommandBuilder).GetTypeInfo().Assembly, src,
                                         interp => {
                                                 var env = interp.State
                                                         .GetExecutionEnvironment<RandomAccessStack<CanonicalNumber>>();

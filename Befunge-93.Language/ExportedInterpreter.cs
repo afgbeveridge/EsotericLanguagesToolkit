@@ -1,12 +1,13 @@
 ﻿using System.Reflection;
+using System.Threading.Tasks;
 using Common;
 using Interpreter.Abstractions;
 
 namespace Befunge_93.Language {
         public class ExportedInterpreter : IEsotericInterpreter {
-                public void Interpret(IOWrapper wrapper, string[] src) =>
-                        new BasicInterpreter<SourceCodeTorus, BaseInterpreterStack>()
-                                .Execute(typeof(CommandBuilder).GetTypeInfo().Assembly, src,
+                public async Task InterpretAsync(IOWrapper wrapper, string[] src) =>
+                        await new BasicInterpreter<SourceCodeTorus, BaseInterpreterStack>()
+                                .ExecuteAsync(typeof(CommandBuilder).GetTypeInfo().Assembly, src,
                                         interp => {
                                                 interp.State.GetSource<SourceCodeTorus>().Size =
                                                         Constants.StandardTorusSize;

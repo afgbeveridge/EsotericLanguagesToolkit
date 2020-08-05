@@ -24,7 +24,7 @@ namespace Eso.API.Services {
                         var wrapper = new LocalIOWrapper(Channel, LocalToken);
                         var bundle = await GetLanguageAndSource(wrapper);
                         var processor = LocateProcessor(bundle.Language);
-                        processor.Interpret(wrapper, new[] { bundle.Source });
+                        await processor.InterpretAsync(wrapper, new[] { bundle.Source });
                         await Channel.CloseAsync(WebSocketCloseStatus.NormalClosure, "Execution complete",
                                 LocalToken.Token);
                 }

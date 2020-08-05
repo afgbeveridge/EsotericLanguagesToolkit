@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Interpreter.Abstractions;
 
 namespace WARP.Language {
@@ -9,7 +10,8 @@ namespace WARP.Language {
 
                 private Func<long, WARPObject, long> Command { get; }
 
-                internal override void Execute(InterpreterState state, SourceCode source, BaseInterpreterStack stack) {
+                internal override Task ExecuteAsync(InterpreterState state, SourceCode source,
+                        BaseInterpreterStack stack) {
                         var result = PropertyNameAndExpression(stack);
                         bool inPopMode = result.PropertyName == Constants.KeyWords.Pop;
                         var pbee = Environment(state);
@@ -22,6 +24,7 @@ namespace WARP.Language {
                                 pbee.Push(obj);
                         else
                                 pbee[result.PropertyName] = obj;
+                        return Task.CompletedTask;
                 }
         }
 }

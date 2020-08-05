@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Interpreter.Abstractions {
         public class Interpreter<TSourceType, TExeType> : IInterpreter<TSourceType, TExeType>
@@ -39,17 +40,18 @@ namespace Interpreter.Abstractions {
 
                 public InterpreterState State { get; protected set; }
 
-                public InterpreterResult Execute() {
+                public async Task<InterpreterResult> ExecuteAsync() {
                         var result = InterpreterResult.Complete;
                         try {
-                                while (Step() && result == InterpreterResult.Complete)
+                                while (await StepAsync() && result == InterpreterResult.Complete)
                                         if (BreakpointDetectors != null && BreakpointDetectors.Any(f => f(State)))
                                                 result = InterpreterResult.BreakpointReached;
                         }
                         catch (Exception) {
                                 InterpreterEvent?.Invoke(this,
                                         new InterpreterEventArgs<TSourceType, TExeType> {
-                                                ActiveInterpreter = this, ErrorState = true
+                                                ActiveInterpreter = this,
+                                                ErrorState = true
                                         });
                                 throw;
                         }
@@ -93,10 +95,13 @@ namespace Interpreter.Abstractions {
                                 .Select(s => string.Concat(s, retainEOL ? Environment.NewLine : string.Empty)).ToList();
                 }
 
-                public bool Step() {
+                public async Task<bool> StepAsync() {
                         var possible = State.GetSource<TSourceType>().More();
-                        if (possible) Gather()?.Apply(State);
-
+                        if (possible) {
+                                var obj = Gather();
+                                if (obj != null)
+                                        await obj.ApplyAsync(State);
+                        }
                         return possible;
                 }
 

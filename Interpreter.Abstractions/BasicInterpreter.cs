@@ -14,6 +14,7 @@
 
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Interpreter.Abstractions {
         public class BasicInterpreter<TSourceType, TExeType>
@@ -25,22 +26,22 @@ namespace Interpreter.Abstractions {
 
                 private bool SkipUnknownCommands { get; set; }
 
-                public void Execute(Assembly ass, string[] src,
+                public async Task ExecuteAsync(Assembly ass, string[] src,
                         Action<Interpreter<TSourceType, TExeType>> preExecution = null) {
                         ExecutionSupport.Assert(src != null, "Source is required for execution");
                         Interpreter = new Interpreter<TSourceType, TExeType>(ass);
                         preExecution?.Invoke(Interpreter);
                         Interpreter.IgnoreUnknownCommands(SkipUnknownCommands);
                         Interpreter.AcceptSource(src, RetainEOL);
-                        Process();
+                        await Process();
                 }
 
                 public BasicInterpreter<TSourceType, TExeType> IgnoreUnknownCommands(bool ignore = true) =>
                         this.Fluently(() => SkipUnknownCommands = ignore);
 
-                private void Process() {
+                private async Task Process() {
                         var result = InterpreterResult.InFlight;
-                        while (result != InterpreterResult.Complete) result = Interpreter.Execute();
+                        while (result != InterpreterResult.Complete) result = await Interpreter.ExecuteAsync();
                 }
         }
 }
