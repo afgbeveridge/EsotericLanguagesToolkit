@@ -80,35 +80,4 @@ namespace BrainFuck.Language {
                         return new BrainFuckCommand(Commands[key], key.ToString());
                 }
         }
-
-
-        public class
-                UnknownCommandSkipper : TrivialInterpreterBase<SimpleSourceCode, RandomAccessStack<CanonicalNumber>> {
-                public override bool Applicable(InterpreterState state) {
-                        var bldr = state.GetExecutionEnvironment<RandomAccessStack<CanonicalNumber>>()
-                                .ScratchPadAs<CommandBuilder>(Constants.Builder);
-                        return !bldr.Applicable(state.BaseSourceCode.CurrentCharacter());
-                }
-
-                public override BaseObject Gather(InterpreterState state) {
-                        while (state.BaseSourceCode.More() && Applicable(state))
-                                state.BaseSourceCode.Advance();
-                        return NullObject.Instance;
-                }
-        }
-
-        internal class
-                BrainFuckCommand : BaseCommand<
-                        Func<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>, Task>> {
-                internal BrainFuckCommand(
-                        Func<InterpreterState, SimpleSourceCode, RandomAccessStack<CanonicalNumber>, Task> cmd,
-                        string keyWord)
-                        : base(cmd, keyWord) { }
-
-                protected override Task InterpretAsync(InterpreterState state) => Command(state,
-                        state.GetSource<SimpleSourceCode>(),
-                        state.GetExecutionEnvironment<RandomAccessStack<CanonicalNumber>>());
-
-                public override object Clone() => new BrainFuckCommand(Command, KeyWord);
-        }
 }
