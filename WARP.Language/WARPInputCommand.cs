@@ -21,8 +21,8 @@ namespace WARP.Language {
                         ExecutionSupport.Assert(Options.Contains(style),
                                 string.Concat("Invalid argument for ',' - ", style));
                         stack.Push(style == "l"
-                                ? new WARPObject(await InteractionWrapper.ReadStringAsync("0"))
-                                : new WARPObject(Convert.ToChar(await InteractionWrapper.ReadCharacterAsync())));
+                                ? new WARPObject(state.KnownRadix(), await InteractionWrapper.ReadStringAsync("0"))
+                                : new WARPObject(state.KnownRadix(), Convert.ToChar(await InteractionWrapper.ReadCharacterAsync())));
                 }
         }
 }

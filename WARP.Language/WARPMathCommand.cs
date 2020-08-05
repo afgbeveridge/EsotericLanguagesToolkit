@@ -18,8 +18,8 @@ namespace WARP.Language {
                         long cur = inPopMode
                                 ? stack.Pop<WARPObject>().AsNumeric()
                                 : pbee[result.PropertyName].As<WARPObject>().AsNumeric();
-                        var obj = new WARPObject(FlexibleNumeralSystem.Encode(Command(cur, result.Expression),
-                                WARPObject.CurrentRadix));
+                        var obj = new WARPObject(state.KnownRadix(), FlexibleNumeralSystem.Encode(Command(cur, result.Expression),
+                                state.KnownRadix()));
                         if (result.PropertyName == Constants.KeyWords.Pop)
                                 pbee.Push(obj);
                         else

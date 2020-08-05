@@ -27,7 +27,7 @@ namespace WARP.Language {
                                                 cmd.ExecutionContext.Enqueue(o);
                                 };
                                 pushIfNonEmpty(a.RealizedObject);
-                                pushIfNonEmpty(new WARPObject(a.PropertyName));
+                                pushIfNonEmpty(new WARPObject(state.KnownRadix(), a.PropertyName));
                                 ExecutionSupport.Emit(() => string.Concat("Command input parsed: ", a.Source));
                         }
 

@@ -20,7 +20,8 @@ namespace WARP.Language.Tests {
                 public void Initialize() {
                         Builder = new CommandBuilder();
                         State = new InterpreterState().Establish<SimpleSourceCode, PropertyBasedExecutionEnvironment>();
-                        WARPObject.CurrentRadix = FlexibleNumeralSystem.StandardRadix;
+                        State.GetExecutionEnvironment<PropertyBasedExecutionEnvironment>()
+                                .ScratchPad[Constants.CurrentRadix] = FlexibleNumeralSystem.StandardRadix;
                         Stack().Reset();
                         State.GetExecutionEnvironment<PropertyBasedExecutionEnvironment>().ScratchPad[Constants.RASName]
                                 = new RandomAccessStack<WARPObject> { MaximumSize = 50000 };

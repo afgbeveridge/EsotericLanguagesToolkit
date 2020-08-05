@@ -55,7 +55,7 @@ namespace WARP.Language {
                                 Expression);
                         Commands[";"] = Builder.Create((state, source, stack) => stack.Duplicate());
                         Commands["+"] = Builder.Create(
-                                (state, source, stack) => WARPObject.CurrentRadix =
+                                (state, source, stack) => state.GetExecutionEnvironment<PropertyBasedExecutionEnvironment>().ScratchPad[Constants.CurrentRadix] =
                                         Convert.ToInt32(stack.Pop<WARPObject>().AsNumeric()),
                                 RegexBuilder.New().StartCaptureGroup("expr").AddCharacterClass("0-9A-Z").OneOrMore()
                                         .EndCaptureGroup().EndMatching().ToRegex());

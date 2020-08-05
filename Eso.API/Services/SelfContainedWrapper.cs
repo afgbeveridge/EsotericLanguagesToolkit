@@ -16,19 +16,22 @@ namespace Eso.API.Services {
 
                 private int CurrentIndex { get; set; }
 
-                public Task<char> ReadCharacterAsync() {
+                public async Task<char> ReadCharacterAsync() {
                         var cur = Input[CurrentLine];
                         if (cur.Length <= CurrentIndex) {
                                 CurrentIndex = 0;
                                 cur = Input[CurrentLine++];
                         }
 
-                        return Task.FromResult(cur[CurrentIndex++]);
+                        var c = cur[CurrentIndex++];
+                        await WriteAsync(c); // Paradoxically, we also pretend that we saw this on the way in
+                        return c;
                 }
 
-                public Task<string> ReadStringAsync(string defaultIfEmpty = "") {
+                public async Task<string> ReadStringAsync(string defaultIfEmpty = "") {
                         var cur = Input[CurrentLine++];
-                        return Task.FromResult(cur);
+                        await WriteAsync(cur); // Paradoxically, we also pretend that we saw this on the way in
+                        return cur;
                 }
 
                 public Task WriteAsync(string src) {

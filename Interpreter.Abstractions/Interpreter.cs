@@ -47,7 +47,7 @@ namespace Interpreter.Abstractions {
                                         if (BreakpointDetectors != null && BreakpointDetectors.Any(f => f(State)))
                                                 result = InterpreterResult.BreakpointReached;
                         }
-                        catch (Exception) {
+                        catch (Exception ex) {
                                 InterpreterEvent?.Invoke(this,
                                         new InterpreterEventArgs<TSourceType, TExeType> {
                                                 ActiveInterpreter = this,

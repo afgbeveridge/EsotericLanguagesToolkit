@@ -33,7 +33,8 @@ namespace WARP {
                                                                                 "rasSize")
                                                         };
                                                 env.ScratchPad[Constants.CurrentBase] = new ConsoleIOWrapper();
-                                                env.OnUnknownKey = e => new WARPObject();
+                                                env.ScratchPad[Constants.CurrentRadix] = FlexibleNumeralSystem.StandardRadix;
+                                                env.OnUnknownKey = e => new WARPObject(e.ScratchPadAs<int>(Constants.CurrentRadix));
                                         }
                                 );
         }

@@ -20,6 +20,7 @@ using Interpreter.Abstractions;
 
 namespace WARP.Language {
         public static class FlexibleNumeralSystem {
+
                 public const int StandardRadix = 36;
                 public const string CharList = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 private static readonly char[] CharListArray = CharList.ToArray();

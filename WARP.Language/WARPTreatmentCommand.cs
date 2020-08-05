@@ -8,7 +8,7 @@ namespace WARP.Language {
                         var val = ((WARPObject) Environment(state)[stack.Pop<WARPObject>().AsString()]).AsString();
                         state.AddExecutionEnvironment(Environment(state).Clone());
                         val.Reverse().ToList()
-                                .ForEach(c => Environment(state).Push(new WARPObject(new string(new[] { c }))));
+                                .ForEach(c => Environment(state).Push(new WARPObject(state.KnownRadix(), new string(new[] { c }))));
                         return Task.CompletedTask;
                 }
         }

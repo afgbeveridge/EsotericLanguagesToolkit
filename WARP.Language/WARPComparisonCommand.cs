@@ -20,7 +20,7 @@ namespace WARP.Language {
                                         var s = obj.AsNumeric();
                                         return f < s ? -1 : f > s ? 1 : 0;
                                 };
-                                stack.Push(new WARPObject(bothNumeric
+                                stack.Push(new WARPObject(state.KnownRadix(), bothNumeric
                                         ? cmp()
                                         : string.Compare(lhs.AsString(), obj.AsString())));
                         }
