@@ -4,6 +4,7 @@ An interpreter suite for the following esoteric languages, written in C# 7:
 * BrainFuck (recent, stable) (http://en.wikipedia.org/wiki/Brainfuck)
 * Befunge-93 (minor defects present) (http://catseye.tc/projects/befunge93/doc/befunge93.html)
 * WARP (specification at [url:http://esolangs.org/wiki/WARP])
+* Deadfish (specification at [url:http://esolangs.org/wiki/Deadfish])
 
 Site maintainers blog: http://tb-it.blogspot.com/
 
