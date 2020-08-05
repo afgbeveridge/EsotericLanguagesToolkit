@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Interpreter.Abstractions;
 
 //============================================================================================================================================================================
 // Copyright (c) 2011-2013 Tony Beveridge
@@ -18,7 +17,7 @@ using Interpreter.Abstractions;
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //============================================================================================================================================================================
 
-namespace WARP.Language {
+namespace Interpreter.Abstractions {
         public static class FlexibleNumeralSystem {
 
                 public const int StandardRadix = 36;
