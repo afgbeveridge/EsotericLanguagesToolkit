@@ -1,0 +1,15 @@
+{
+  "name": "Eso.Blazor.SPA",
+  "short_name": "Eso.Blazor.SPA",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#03173d",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

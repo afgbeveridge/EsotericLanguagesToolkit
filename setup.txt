@@ -1,0 +1,50 @@
+docker pull rabbitmq
+docker run -d -p 15672:15672 -p 5672:5672 --hostname local-rabbit --name local-rabbit rabbitmq:3-management
+docker pull mysql
+docker run -p 3306:3306 --name eso-mysql -e MYSQL_ROOT_PASSWORD=pass123 -d mysql:latest
+
+Python
+Set up rabbit queues, default exchange, LangUpdate and LangExecution
+activate.bat
+python app.py in cmd window
+
+EF core
+Add-Migration -StartupProject Eso.API.Editor DBInit
+Update-Database
+
+Blazor app
+Allows language to be defined or edited
+Check valid as much as possible in client
+Generate documentation for eso lang upload
+Post definition
+ -- message to queue re: new or updated language
+
+Tabbed 
+ - Edit
+ - Execute
+ - ?
+
+
+mysql
+
+create esolangs;
+use esolangs;
+
+create table language(
+   id INT NOT NULL AUTO_INCREMENT,
+   name VARCHAR(100) NOT NULL,
+   date_created DATE,
+   PRIMARY KEY ( id )
+);
+
+create table language_command(
+   id INT NOT NULL AUTO_INCREMENT,
+   language_id int NOT NULL,
+   keyword VARCHAR(1) NOT NULL,
+   nature VARCHAR(20) NOT NULL,
+   date_created DATE,
+   PRIMARY KEY ( id ),
+   FOREIGN KEY (language_id)
+        REFERENCES language (id)
+        ON UPDATE RESTRICT ON DELETE CASCADE
+);

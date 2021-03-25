@@ -1,0 +1,88 @@
+﻿@page "/language-exec"
+@using Microsoft.Extensions.Configuration
+@using Eso.API.Editor.Models
+@using Eso.Blazor.SPA.Client.Services;
+@inject HttpClient Http
+@inject IEnumerable<ILanguageService> LanguageServices
+@inject IConfiguration Configuration
+@inject IJSRuntime JS;
+
+<LanguageSelector Show="@ShowSelector" OnValidSelection="@LanguageChanges"></LanguageSelector>
+@if (Language != null) {
+        <Heading Size="HeadingSize.Is2" Alignment="TextAlignment.Center">@Language</Heading>
+
+        <Field>
+                <FieldLabel ColumnSize="ColumnSize.Is2">Source code</FieldLabel>
+                <MemoEdit Rows="10" @bind-Text="@SourceCode" />
+        </Field>
+        <Paragraph Alignment="TextAlignment.Left">
+                <Button Color="Color.Primary" Type="ButtonType.Submit" Clicked="RunAsync" Disabled="@(string.IsNullOrWhiteSpace(SourceCode))">Run</Button>
+                <Button Color="Color.Primary" Type="ButtonType.Submit">Cancel</Button>
+        </Paragraph>
+        @if (InputRequired) {
+                <Paragraph Alignment="TextAlignment.Left">
+                        <Field>
+                                <FieldLabel ColumnSize="ColumnSize.Is2">Input required</FieldLabel>
+                                <TextEdit Placeholder="..." @bind-Text="@ProgramInput" />
+                        </Field>
+                        <Button Color="Color.Primary" Type="ButtonType.Submit" Clicked="SendInputAsync">Send</Button>
+                </Paragraph>
+        }
+        <Field>
+                <FieldLabel ColumnSize="ColumnSize.Is2">Output</FieldLabel>
+                <MemoEdit Rows="10" @bind-Text="@Output" ReadOnly="true" />
+        </Field>
+}
+
+@code {
+        [Parameter]
+        public string Language { get; set; }
+
+        private bool NotRunnable { get; set; } = true;
+        private string Output { get; set; }
+        private string ProgramInput { get; set; } = string.Empty;
+        private bool InputRequired { get; set; }
+
+        public string SourceCode { get; set; }
+
+        private async Task RunAsync() {
+                Output = string.Empty;
+                var cmds = Commands == null ? string.Empty : string.Join(" ", Commands.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+                await JS.InvokeAsync<object>("websocketInterop.send", $"|{Language}|{SourceCode}|{cmds}");
+        }
+
+        async Task SendInputAsync() {
+                await JS.InvokeAsync<object>("websocketInterop.send", ProgramInput);
+                InputRequired = false;
+                StateHasChanged();
+        }
+
+        protected override async Task OnInitializedAsync() {
+                await JS.InvokeAsync<object>("websocketInterop.connect", DotNetObjectReference.Create(this), Configuration["ExecutionUrl"]);
+        }
+
+        [JSInvokable]
+        public void OnMessage(string msg) {
+                if (msg == "\t")
+                        InputRequired = true;
+                else
+                        Output += msg;
+                StateHasChanged();
+        }
+
+        private async Task LanguageChanges(Language lang) {
+                Language = lang.Name;
+                ShowSelector = false;
+                // Now we need the lexicon if non standard
+                Commands = null;
+                if (!lang.IsNativelySupported) {
+                        var svc = LanguageServices.First(s => s.UnderstandsEditing);
+                        svc.Using(Http).ForLanguage(Language);
+                        Commands = (await svc.Commands()).ToDictionary(c => c.Concept, c => c.Keyword);
+                }
+        }
+
+        private bool ShowSelector { get; set; } = true;
+
+        private Dictionary<string, string> Commands { get; set; }
+}

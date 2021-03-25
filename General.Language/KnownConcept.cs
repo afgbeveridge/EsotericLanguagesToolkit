@@ -1,0 +1,58 @@
+﻿
+
+namespace General.Language {
+        public enum KnownConcept {
+                [CommandNature(LanguageCommandGroup.Operator)]
+                Comparison,
+                [CommandNature(LanguageCommandGroup.Stack)]
+                Pop,
+                [CommandNature(LanguageCommandGroup.Stack)]
+                Treat,
+                [CommandNature(LanguageCommandGroup.Stack)]
+                Untreat,
+                [CommandNature(LanguageCommandGroup.Stack)]
+                Push,
+                [CommandNature(LanguageCommandGroup.Stack)]
+                PopAndPush,
+                [CommandNature(LanguageCommandGroup.Stack)]
+                DuplicateTOS,
+                [CommandNature(LanguageCommandGroup.Stack)]
+                RotateStacks,
+                [CommandNature(LanguageCommandGroup.Stack)]
+                RetrieveFromRAS,
+                [CommandNature(LanguageCommandGroup.Stack)]
+                PlaceInRAS,
+                [CommandNature(LanguageCommandGroup.Operator)]
+                Addition,
+                [CommandNature(LanguageCommandGroup.Operator)]
+                Subtraction,
+                [CommandNature(LanguageCommandGroup.Operator)]
+                Multiplication,
+                [CommandNature(LanguageCommandGroup.Operator)]
+                Division,
+                [CommandNature(LanguageCommandGroup.Operator)]
+                Modulo,
+                [CommandNature(LanguageCommandGroup.LabelsAndMovement)]
+                Jump,
+                [CommandNature(LanguageCommandGroup.LabelsAndMovement)]
+                Label,
+                [CommandNature(LanguageCommandGroup.Operator)]
+                Assignment,
+                [CommandNature(LanguageCommandGroup.Operator)]
+                ConditionalExecution,
+                [CommandNature(LanguageCommandGroup.Operator)]
+                RadixSwitch,
+                [CommandNature(LanguageCommandGroup.InputOutput)]
+                OutputCharacter,
+                [CommandNature(LanguageCommandGroup.InputOutput)]
+                OutputNativeForm,
+                [CommandNature(LanguageCommandGroup.InputOutput)]
+                Input,
+                [CommandNature(LanguageCommandGroup.Miscellaneous)]
+                CurrentStack,
+                [CommandNature(LanguageCommandGroup.Miscellaneous)]
+                Quine,
+                [CommandNature(LanguageCommandGroup.Miscellaneous)]
+                Period
+        }
+}

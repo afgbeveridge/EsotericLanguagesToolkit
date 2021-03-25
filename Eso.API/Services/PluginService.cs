@@ -27,7 +27,6 @@ namespace Eso.API.Services {
                                         .Export<IEsotericInterpreter>()
                                         .Shared();
                                 var searchDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-                                ;
                                 var configuration =
                                         new ContainerConfiguration().WithAssembliesInPath(searchDirectory, conventions);
                                 Container = configuration.CreateContainer();

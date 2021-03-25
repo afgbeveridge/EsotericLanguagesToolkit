@@ -1,0 +1,201 @@
+﻿
+@using Eso.API.Editor.Models
+@using System.Linq
+@using Blazorise.Components;
+@using Blazorise.Snackbar;
+@using Eso.Blazor.SPA.Client.Services;
+@inject HttpClient Http
+@inject IEnumerable<ILanguageService> LanguageServices
+
+<Heading Size="HeadingSize.Is2" Alignment="TextAlignment.Center">Language @(IsEditing ? "editor" : "generator")</Heading>
+
+@if (availableCommandsGroups == null) {
+        Working = true;
+        <Working IsLoading="Working"></Working>
+}
+else {
+        <Working IsLoading="Working">
+                <Snackbar @ref="snackbar">
+                        <SnackbarBody>
+                                An unexpected error occurred
+                        </SnackbarBody>
+                </Snackbar>
+                <Form>
+                        @* Mode set to manual to help address glacial performance *@
+                        <Validations Mode="ValidationMode.Manual" EditContext="editContext" @ref="validations">
+                                <Paragraph Alignment="TextAlignment.Center">
+                                        <Button Color="Color.Primary" Type="ButtonType.Submit" PreventDefaultOnSubmit="true" Clicked="HandleSubmitAsync">Save</Button>
+                                        @if (IsEditing) {
+                                                <Button Color="Color.Primary" Type="ButtonType.Submit" PreventDefaultOnSubmit="true" Clicked="HandleCancelAsync">Cancel</Button>
+                                        }
+                                        @if (!IsEditing) {
+                                                <Button Color="Color.Primary" Clicked="AutoGenerate">Auto Generate</Button>
+                                        }
+                                </Paragraph>
+                                <Paragraph Alignment="TextAlignment.Center">
+                                        <Validation Validator="@ValidateName">
+                                                <Field>
+                                                        <FieldLabel ColumnSize="ColumnSize.Is2">Name</FieldLabel>
+                                                        <TextEdit @bind-Text="@languageName" Placeholder="Enter a name..." Disabled="IsEditing">
+                                                                <Feedback>
+                                                                        <ValidationError>A language name is required or is already taken</ValidationError>
+                                                                </Feedback>
+                                                        </TextEdit>
+                                                </Field>
+                                        </Validation>
+                                </Paragraph>
+                                <Accordion>
+                                        @foreach (var grp in availableCommandsGroups) {
+                                                var currentGroup = grp.First().Nature;
+                                                <Collapse Visible="Visibility[currentGroup]">
+                                                        <CollapseHeader>
+                                                                <Heading Size="HeadingSize.Is5">
+                                                                        <Button Clicked="@(() => Visibility[currentGroup] = !Visibility[currentGroup])">@currentGroup</Button>
+                                                                </Heading>
+                                                        </CollapseHeader>
+                                                        <CollapseBody>
+                                                                @foreach (var cmd in grp) {
+                                                                        <Validation Validator="@ValidateKeyword">
+                                                                                <Field Horizontal="true">
+                                                                                        <FieldLabel ColumnSize="ColumnSize.Is2">@cmd.Concept</FieldLabel>
+                                                                                        <FieldBody ColumnSize="ColumnSize.Is10">
+                                                                                                <Select TValue="string" @bind-SelectedValue="@selectedValues[cmd.Concept].Keyword">
+                                                                                                        <ChildContent>
+                                                                                                                @foreach (var c in availableCommandsGroups.SelectMany(g => g)) {
+                                                                                                                        <SelectItem Value="@c.Keyword">@c.Keyword</SelectItem>
+                                                                                                                }
+                                                                                                        </ChildContent>
+                                                                                                        <Feedback>
+                                                                                                                <ValidationError>Duplicate keyword detected</ValidationError>
+                                                                                                        </Feedback>
+                                                                                                </Select>
+                                                                                        </FieldBody>
+                                                                                </Field>
+                                                                        </Validation>
+                                                                }
+                                                        </CollapseBody>
+                                                </Collapse>
+                                        }
+                                </Accordion>
+                        </Validations>
+                </Form>
+        </Working>
+
+}
+
+@code {
+        [Parameter]
+        public string Mode { get; set; }
+
+        [Parameter]
+        public EventCallback<bool> OnUserAction { get; set; }
+
+        private bool IsEditing => Mode != "new" && !string.IsNullOrWhiteSpace(Mode);
+
+        private ILanguageService LanguageService;
+        private Snackbar snackbar;
+        private bool Working;
+        private Validations validations;
+        private List<LanguageCommand[]> availableCommandsGroups;
+        private Dictionary<string, bool> Visibility { get; set; }
+        private EditContext editContext;
+        Dictionary<string, Wrapper> selectedValues;
+        private string languageName;
+
+        protected override async Task OnParametersSetAsync() {
+                if (string.IsNullOrWhiteSpace(Mode)) {
+                        availableCommandsGroups = null;
+                }
+                else {
+                        Working = true;
+                        Console.WriteLine("Init language editor " + Mode);
+                        if (IsEditing) languageName = Mode;
+                        LanguageService = LanguageServices.First(s => s.UnderstandsEditing == IsEditing);
+                        LanguageService.Using(Http).ForLanguage(languageName);
+                        availableCommandsGroups = (await LanguageService.Commands())
+                                .GroupBy(c => c.Nature)
+                                .Select(grp => grp.AsEnumerable().ToArray())
+                                .ToList();
+                        selectedValues = availableCommandsGroups
+                                                .SelectMany(g => g)
+                                                .ToDictionary(c => c.Concept, c => new Wrapper { Keyword = c.Keyword, Concept = c.Concept });
+                        editContext = new EditContext(selectedValues);
+                        Visibility = availableCommandsGroups
+                                        .ToDictionary(c => c.First().Nature, c => false);
+                        Working = false;
+                }
+        }
+
+        public void ValidateKeyword(ValidatorEventArgs e) {
+                var word = Convert.ToString(e.Value);
+                Console.WriteLine("Validate " + word);
+                e.Status = selectedValues.Count(v => v.Value.Keyword == word) > 1 ? ValidationStatus.Error : ValidationStatus.Success;
+        }
+
+        public void ValidateName(ValidatorEventArgs e) {
+                e.Status = string.IsNullOrWhiteSpace(languageName) ? ValidationStatus.Error : ValidationStatus.Success;
+        }
+
+        private async Task HandleSubmitAsync() {
+                var isValid = validations.ValidateAll();
+                if (isValid) {
+                        await Task.Delay(5);
+                        Console.WriteLine(isValid);
+                        try {
+                                var l = CreateLanguage();
+                                var response = await LanguageService.Save(l);
+                                response.EnsureSuccessStatusCode();
+                                await OnUserAction.InvokeAsync(true);
+                        }
+                        catch (Exception ex) {
+                                snackbar.Show();
+                        }
+                }
+        }
+
+        private async Task HandleCancelAsync() {
+                await OnUserAction.InvokeAsync(false);
+        }
+
+        private Language CreateLanguage() {
+                Console.WriteLine("Create language object for " + Mode);
+                var l = new Language {
+                        Name = languageName,
+                        Commands = selectedValues
+                                .Select(kvp => new LanguageCommand { Keyword = kvp.Value.Keyword, Concept = kvp.Value.Concept })
+                                .ToArray()
+                };
+                Console.WriteLine($"Created payload for {l.Name}, with {l.Commands.Count()} commands");
+                return l;
+        }
+
+        private void AutoGenerate() {
+                try {
+                        Working = true;
+                        StateHasChanged();
+                        var rnd = new Random();
+                        var _ = selectedValues
+                                                .Select(kvp => kvp.Value.Keyword)
+                                                .OrderBy(_ => rnd.Next())
+                                                .Zip(selectedValues, (f, s) => {
+                                                        Console.WriteLine($"Change {s.Value.Keyword} to {f}");
+                                                        s.Value.Keyword = f;
+                                                        return f;
+                                                })
+                                                .ToArray(); // Force eval
+                }
+                finally {
+                        Working = false;
+                        Console.WriteLine("Force UI update");
+                        StateHasChanged();
+                }
+
+        }
+
+        public class Wrapper {
+                public string Keyword { get; set; }
+                public string Concept { get; set; }
+                internal Wrapper Duplicate => new Wrapper { Keyword = Keyword, Concept = Concept };
+        }
+
+}

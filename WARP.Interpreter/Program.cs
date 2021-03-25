@@ -12,7 +12,10 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //============================================================================================================================================================================
 
+using General.Language;
 using Interpreter.Abstractions;
+using System.Collections.ObjectModel;
+using System.Linq;
 using WARP.Language;
 
 namespace WARP {
@@ -22,20 +25,28 @@ namespace WARP {
 
                 private static void Main(string[] args) =>
                         new CommandLineExecutor<SimpleSourceCode, PropertyBasedExecutionEnvironment>()
-                                .Execute(typeof(CommandBuilder).Assembly, Message, args,
+                                .Execute(new[] { typeof(Language.CommandBuilder).Assembly, typeof(WhiteSpaceSkipper).Assembly }, Message, args,
                                         interp => {
+                                                Bind(interp.KnownInterpreters);
                                                 var env = interp.State
                                                         .GetExecutionEnvironment<PropertyBasedExecutionEnvironment>();
-                                                env.ScratchPad[Constants.RASName] =
-                                                        new RandomAccessStack<WARPObject> {
+                                                env.ScratchPad[General.Language.Constants.RASName] =
+                                                        new RandomAccessStack<LanguageObject> {
                                                                 MaximumSize =
                                                                         ConfigurationSupport.ConfigurationFor<int>(
                                                                                 "rasSize")
                                                         };
-                                                env.ScratchPad[Constants.CurrentBase] = new ConsoleIOWrapper();
-                                                env.ScratchPad[Constants.CurrentRadix] = FlexibleNumeralSystem.StandardRadix;
-                                                env.OnUnknownKey = e => new WARPObject(e.ScratchPadAs<int>(Constants.CurrentRadix));
+                                                env.ScratchPad[General.Language.Constants.CurrentBase] = new ConsoleIOWrapper();
+                                                env.ScratchPad[General.Language.Constants.CurrentRadix] = FlexibleNumeralSystem.StandardRadix;
+                                                env.OnUnknownKey = e => new LanguageObject(e.ScratchPadAs<int>(General.Language.Constants.CurrentRadix));
                                         }
                                 );
+                private static void Bind(ReadOnlyCollection<ITrivialInterpreterBase<SimpleSourceCode, PropertyBasedExecutionEnvironment>> handlers) {
+                        handlers
+                                .Select(h => h as General.Language.CommandBuilder)
+                                .Where(h => h != null)
+                                .ToList()
+                                .ForEach(h => h.WithBindings(Constants.DefaultKeywordBindings).Initialize());
+                }
         }
 }

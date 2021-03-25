@@ -27,9 +27,12 @@ namespace Interpreter.Abstractions {
                 private bool SkipUnknownCommands { get; set; }
 
                 public async Task ExecuteAsync(Assembly ass, string[] src,
+                        Action<Interpreter<TSourceType, TExeType>> preExecution = null) => await ExecuteAsync(new[] { ass }, src, preExecution);
+
+                public async Task ExecuteAsync(Assembly[] asses, string[] src,
                         Action<Interpreter<TSourceType, TExeType>> preExecution = null) {
                         ExecutionSupport.Assert(src != null, "Source is required for execution");
-                        Interpreter = new Interpreter<TSourceType, TExeType>(ass);
+                        Interpreter = new Interpreter<TSourceType, TExeType>(asses);
                         preExecution?.Invoke(Interpreter);
                         Interpreter.IgnoreUnknownCommands(SkipUnknownCommands);
                         Interpreter.AcceptSource(src, RetainEOL);

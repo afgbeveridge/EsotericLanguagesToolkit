@@ -1,11 +1,17 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Common;
+using General.Language;
 
 namespace Eso.API.Services {
         public class WebSocketHandler : IWebSocketHandler {
+
+                private const string Generalized = "*";
+
                 public WebSocketHandler(IPluginService pluginService) => PluginHandler = pluginService;
 
                 private WebSocket Channel { get; set; }
@@ -22,28 +28,53 @@ namespace Eso.API.Services {
 
                 public async Task Process() {
                         var wrapper = new LocalIOWrapper(Channel, LocalToken);
-                        var bundle = await GetLanguageAndSource(wrapper);
-                        var processor = LocateProcessor(bundle.Language);
+                        var bundle = await GetLanguagSourceAndPossiblyCommands(wrapper);
+                        var processor = LocateProcessor(bundle);
                         await processor.InterpretAsync(wrapper, new[] { bundle.Source });
                         await Channel.CloseAsync(WebSocketCloseStatus.NormalClosure, "Execution complete",
                                 LocalToken.Token);
                 }
 
-                private async Task<SourceBundle> GetLanguageAndSource(LocalIOWrapper wrapper) {
+                private async Task<SourceBundle> GetLanguagSourceAndPossiblyCommands(LocalIOWrapper wrapper) {
                         var src = await wrapper.Receive(false);
                         // TODO: Assert
                         var end = src.IndexOf(src.First(), 1);
+                        var cmds = src.IndexOf(src.First(), end + 1) + 1;
                         return new SourceBundle {
-                                Language = src.Substring(1, end - 1),
-                                Source = src.Substring(end + 1)
+                                Language = src[1..end],
+                                Source = src[(end + 1)..(cmds - 1)],
+                                Commands = CreateCommands(cmds >= src.Length ? null : src[cmds..])
                         };
                 }
 
-                private IEsotericInterpreter LocateProcessor(string language) => PluginHandler.InterpreterFor(language);
+                private Dictionary<KnownConcept, string> CreateCommands(string commands) {
+                        var result = default(Dictionary<KnownConcept, string>);
+                        if (commands != null) {
+                                // Expect [concept=char<space>]+
+                                result = commands.Split(' ')
+                                           .Select(s => {
+                                                   var comps = s.Split('=');
+                                                   return new { Concept = comps.First(), Keyword = comps[1] }; 
+                                           })
+                                           .ToDictionary(a => Enum.Parse<KnownConcept>(a.Concept), a => a.Keyword);
+                        }
+                        return result;
+                }
+
+                private IEsotericInterpreter LocateProcessor(SourceBundle bundle) {
+                        var general = bundle.Commands != null;
+                        var processor = PluginHandler.InterpreterFor(general ? Generalized : bundle.Language);
+                        if (general) {
+                                var interp = processor as IGeneralizedInterpreter;
+                                interp.UseBindings(bundle.Commands);
+                        }
+                        return processor;
+                }
 
                 private class SourceBundle {
                         internal string Language { get; set; }
                         internal string Source { get; set; }
+                        internal Dictionary<KnownConcept, string> Commands { get; set; } // Will be null/missing if natively supported
                 }
         }
 }

@@ -1,0 +1,14 @@
+app:
+    port: 5555
+    host: localhost
+rabbit:
+   - queue: LangUpdate
+     host: localhost
+     port: 5672
+     user: guest
+     pwd: guest
+   - queue: LangExecution
+     host: localhost
+     port: 5672
+     user: guest
+     pwd: guest

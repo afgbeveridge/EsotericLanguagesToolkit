@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -27,14 +28,19 @@ namespace Interpreter.Abstractions {
                 private readonly List<ITrivialInterpreterBase<TSourceType, TExeType>> Interpreters =
                         new List<ITrivialInterpreterBase<TSourceType, TExeType>>();
 
-                public Interpreter(Assembly ass, string baseConfigName = null) {
-                        DetectInterpreters(ass);
+                public Interpreter(Assembly ass, string baseConfigName = null) : this(new[] { ass }) {
+                }
+
+                public Interpreter(Assembly[] asses, string baseConfigName = null) {
+                        DetectInterpreters(asses);
                         State = new InterpreterState().Establish<TSourceType, TExeType>();
                 }
 
                 private bool SkipUnknownCommands { get; set; }
 
                 public IEnumerable<Func<InterpreterState, bool>> BreakpointDetectors { get; set; }
+
+                public ReadOnlyCollection<ITrivialInterpreterBase<TSourceType, TExeType>> KnownInterpreters => Interpreters.AsReadOnly();
 
                 private TSourceType SourceCode => State.GetSource<TSourceType>();
 
@@ -111,11 +117,14 @@ namespace Interpreter.Abstractions {
                         return this;
                 }
 
-                private void DetectInterpreters(Assembly ass) =>
-                        Interpreters.AddRange(ass.GetTypes()
-                                .Where(t =>
-                                        t.GetInterface(typeof(ITrivialInterpreterBase<TSourceType, TExeType>).Name) !=
-                                        null && !t.IsAbstract).Select(t =>
-                                        Activator.CreateInstance(t) as ITrivialInterpreterBase<TSourceType, TExeType>));
+                private void DetectInterpreters(Assembly[] asses) =>
+                        Interpreters.AddRange(
+                                asses
+                                        .SelectMany(a => a.GetTypes()) // Slow, but not really an issue
+                                        .Where(t =>
+                                                t.GetInterface(typeof(ITrivialInterpreterBase<TSourceType, TExeType>).Name) !=
+                                                null && !t.IsAbstract)
+                                        .Select(t =>
+                                                Activator.CreateInstance(t) as ITrivialInterpreterBase<TSourceType, TExeType>));
         }
 }

@@ -63,6 +63,8 @@ namespace Interpreter.Abstractions {
 
                 public RegexBuilder EndMatching() => this.Fluently(() => Builder.Append("$"));
 
+                public RegexBuilder Escape => this.Fluently(() => Builder.Append("\\"));
+
                 public RegexBuilder RememberAs(string key) =>
                         this.Fluently(() => RegisteredPatterns[key] = Builder.ToString());
 
