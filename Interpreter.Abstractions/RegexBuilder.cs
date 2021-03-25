@@ -18,6 +18,8 @@ using System.Text.RegularExpressions;
 
 namespace Interpreter.Abstractions {
         public class RegexBuilder {
+
+                private const string NonEscapable = "_";
                 static RegexBuilder() => RegisteredPatterns = new Dictionary<string, string>();
 
                 public RegexBuilder() => Builder = new StringBuilder();
@@ -51,7 +53,12 @@ namespace Interpreter.Abstractions {
 
                 public RegexBuilder OneOrMore() => this.Fluently(() => Builder.Append("+"));
 
-                public RegexBuilder Literal(string content) => this.Fluently(() => Builder.Append(content));
+                public RegexBuilder Literal(string content) => 
+                        this.Fluently(() => {
+                                if (Builder.Length > 0 && content == NonEscapable && Builder[Builder.Length - 1] == '\\')
+                                        Builder.Remove(Builder.Length - 1, 1);
+                                Builder.Append(content); 
+                        });
 
                 public RegexBuilder OneFrom(IEnumerable<string> options) =>
                         this.Fluently(() => Builder.Append(string.Join("|", options)));
