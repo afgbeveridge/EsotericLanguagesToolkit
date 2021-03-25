@@ -1,0 +1,43 @@
+﻿@using Eso.API.Editor.Models
+@using System.Linq
+@using Blazorise.Components;
+@using Blazorise.Snackbar;
+@using Eso.Blazor.SPA.Client.Services;
+@inject DiscoveryServiceClient Disco
+
+@if (AllLanguages != null && Show) {
+        <Heading Size="HeadingSize.Is2" Alignment="TextAlignment.Center">Select a language</Heading>
+        <Select TValue="string" SelectedValue="@language" SelectedValueChanged="@OnSelectedValueChanged">
+                @foreach (var c in AllLanguages) {
+                        <SelectItem Value="@c.Name">@c.Name</SelectItem>
+                }
+        </Select>
+}
+
+@code {
+
+        [Parameter]
+        public bool Show { get; set; } = true;
+
+        [Parameter]
+        public EventCallback<Language> OnValidSelection { get; set; }
+
+        protected override void OnParametersSet() {
+                if (!Show) language = NoSelection;
+        }
+
+        private const string NoSelection = "-- Select --";
+
+        public IEnumerable<Language> AllLanguages { get; set; }
+
+        protected override async Task OnInitializedAsync() => AllLanguages = new[] { new Language { Name = NoSelection } }.Concat(await Disco.GetLanguages());
+
+        public string language { get; set; } = NoSelection;
+
+        async Task OnSelectedValueChanged(string value) {
+                language = value;
+                Console.WriteLine("l is " + value);
+                if (language != NoSelection)
+                        await OnValidSelection.InvokeAsync(AllLanguages.First(l => language == l.Name));
+        }
+}

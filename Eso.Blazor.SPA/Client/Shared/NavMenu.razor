@@ -1,0 +1,48 @@
+﻿@using Blazorise.Sidebar
+
+<Sidebar @ref="sidebar">
+        <SidebarContent>
+                <SidebarBrand>
+                        <a href="">Features</a>
+                </SidebarBrand>
+                <SidebarNavigation>
+                        <SidebarItem>
+                                <SidebarLink To="" Title="Home">
+                                        <Icon Name="IconName.Home" Margin="Margin.Is3.FromRight" />Home
+                                </SidebarLink>
+                        </SidebarItem>
+                        <SidebarItem>
+                                <SidebarLink Toggled="(isOpen)=> editorSidebarSubItems.Toggle(isOpen)" IsShow="true">
+                                        <Icon Name="IconName.Flask" Margin="Margin.Is3.FromRight" />Manage
+                                </SidebarLink>
+                                <SidebarSubItem @ref="editorSidebarSubItems" IsShow="true">
+                                        <SidebarItem>
+                                                <SidebarLink To="/new-language">Generate language</SidebarLink>
+                                        </SidebarItem>
+                                        <SidebarItem>
+                                                <SidebarLink To="/language-choose">Edit language</SidebarLink>
+                                        </SidebarItem>
+                                        @* other subitems *@
+                                </SidebarSubItem>
+                        </SidebarItem>
+                        <SidebarItem>
+                                <SidebarLink Toggled="(isOpen)=> executionSidebarSubItems.Toggle(isOpen)" IsShow="true">
+                                        <Icon Name="IconName.Eye" Margin="Margin.Is3.FromRight" />Execute
+                                </SidebarLink>
+                                <SidebarSubItem @ref="executionSidebarSubItems" IsShow="true">
+                                        <SidebarItem>
+                                                <SidebarLink To="/language-exec">Execution pad</SidebarLink>
+                                        </SidebarItem>
+                                </SidebarSubItem>
+                        </SidebarItem>
+                </SidebarNavigation>
+        </SidebarContent>
+</Sidebar>
+
+@code{
+        Sidebar sidebar;
+        SidebarSubItem editorSidebarSubItems;
+        SidebarSubItem executionSidebarSubItems;
+
+        void ToggleSidebar() => sidebar.Toggle();
+}

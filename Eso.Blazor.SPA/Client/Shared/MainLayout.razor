@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+<Layout>
+        <LayoutHeader Fixed="true">
+                <Heading Size="HeadingSize.Is1" Alignment="TextAlignment.Center">Esoteric language workbench</Heading>
+        </LayoutHeader>
+        <Layout Sider="true">
+                <LayoutSider>
+                        <LayoutSiderContent>
+                                <NavMenu />
+                        </LayoutSiderContent>
+                </LayoutSider>
+                <Layout>
+                        <LayoutContent>
+                                @Body
+                        </LayoutContent>
+                </Layout>
+        </Layout>
+</Layout>

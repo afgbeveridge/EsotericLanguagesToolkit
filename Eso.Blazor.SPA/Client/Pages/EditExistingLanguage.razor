@@ -1,0 +1,34 @@
+﻿@page "/language-choose"
+@using Eso.API.Editor.Models
+@using System.Linq
+@using Blazorise.Components;
+@using Blazorise.Snackbar;
+@using Eso.Blazor.SPA.Client.Services;
+
+@*<LanguageSelector Show="@Show" OnValidSelection="@(args => LanguageChanges(args.Item1, args.Item2))"></LanguageSelector>*@
+<LanguageSelector Show="@Show" OnValidSelection="LanguageChanges"></LanguageSelector>
+@if (LanguageSelected) {
+        <LanguageEditor Mode="@language"
+                        OnUserAction="@(async () => { await Task.Yield(); RevertToSelection(); })"></LanguageEditor>
+}
+
+@code {
+
+        private bool LanguageSelected => language != null;
+
+        private Task LanguageChanges(Language lang) {
+                language = lang.Name;
+                Show = false;
+                return Task.CompletedTask;
+        }
+
+        private bool Show { get; set; } = true;
+
+        private void RevertToSelection() {
+                language = null;
+                Show = true;
+        }
+
+        public string language { get; set; }
+
+}

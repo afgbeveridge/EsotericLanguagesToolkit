@@ -85,6 +85,9 @@ namespace Interpreter.Abstractions {
                 private StackDumpDirective ShowStackRecursivelyWhenStepping { get; set; }
 
                 public void Execute(Assembly ass, string startupMessage, string[] args,
+                        Action<Interpreter<TSourceType, TExeType>> preExecution = null) => Execute(new[] { ass }, startupMessage, args, preExecution);
+
+                public void Execute(Assembly[] asses, string startupMessage, string[] args,
                         Action<Interpreter<TSourceType, TExeType>> preExecution = null) {
                         try {
                                 ExecutionSupport.Assert(args.Any(),
@@ -104,7 +107,7 @@ namespace Interpreter.Abstractions {
                                         }
                                         else {
                                                 Interpreter =
-                                                        new Interpreter<TSourceType, TExeType>(ass).Register(
+                                                        new Interpreter<TSourceType, TExeType>(asses).Register(
                                                                 FormatInterpreterState);
                                                 ApplyActiveOptions();
                                                 if (i == 0 && !SuppressStartupMessage)

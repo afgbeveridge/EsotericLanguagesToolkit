@@ -2,7 +2,7 @@
   "profiles": {
     "WARP.Interpreter": {
       "commandName": "Project",
-      "commandLineArgs": "..\\..\\..\\examples\\calculator.warp"
+      "commandLineArgs": "..\\..\\..\\examples\\primes.warp"
     }
   }
 }

@@ -14,16 +14,11 @@ namespace Eso.API.Controllers {
                 private IPluginService Service { get; }
 
                 [HttpGet("languages")]
-                public IEnumerable<LanguageMetadata> SupportedLanguages() =>
+                public IEnumerable<LanguageMetadata> NativelySupportedLanguages() =>
                         Service
                                 .RegisteredInterpreters
                                 .Select(CreateMetadata);
 
-                [HttpGet("languages/{language}")]
-                public IActionResult LanguageDetails(string language) {
-                        var interp = Service.InterpreterFor(language);
-                        return interp != null ? new ObjectResult(CreateMetadata(interp)) : (IActionResult) NotFound();
-                }
 
                 [HttpPost("languages/{language}/execute")]
                 public IActionResult ExecuteSimple(string language, [FromBody] RawRequest src) {
