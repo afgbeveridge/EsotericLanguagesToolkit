@@ -8,7 +8,7 @@ namespace General.Language {
                         var rhs = stack.Pop<LanguageObject>().AsNumeric();
                         var res = Environment(state).ScratchPadAs<CommandBuilder>(Constants.Builder)
                                 .KeyAndBuilder(state);
-                        ActionCommand<PropertyBasedExecutionEnvironment> cmd = Gather(state, res.Key, res.Builder);
+                        ActionCommand<PropertyBasedExecutionEnvironment> cmd = Gather(state, res.Key, res.Builder, KeywordBindings);
                         ExecutionSupport.Emit(() => string.Concat("Comparison: ", lhs, " == ", rhs, "?"));
                         if (lhs == rhs)
                                 await cmd.ApplyAsync(state);

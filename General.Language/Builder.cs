@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Interpreter.Abstractions;
@@ -26,7 +27,7 @@ namespace General.Language {
 
                 internal static Builder Inactive(Regex expr) => new Builder { Expression = expr };
 
-                internal MatchAnalyzer Examine(InterpreterState state, string key) {
+                internal MatchAnalyzer Examine(InterpreterState state, string key, Dictionary<KnownConcept, string> bindings) {
                         var input = state.Source().Current();
                         var hadEnough = false;
                         while (state.Source().More() && !hadEnough) {
@@ -40,7 +41,7 @@ namespace General.Language {
                         }
 
                         if (state.Source().More()) state.Source().Advance();
-                        return new MatchAnalyzer(input).Absorb(state, key, Expression);
+                        return new MatchAnalyzer(input, bindings).Absorb(state, key, Expression);
                 }
         }
 }

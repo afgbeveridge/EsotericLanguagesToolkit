@@ -53,7 +53,7 @@ namespace Eso.API.Services {
                                 // Expect [concept=char<space>]+
                                 result = commands.Split(' ')
                                            .Select(s => {
-                                                   var comps = s.Split('=');
+                                                   var comps = s.Split('\\');
                                                    return new { Concept = comps.First(), Keyword = comps[1] }; 
                                            })
                                            .ToDictionary(a => Enum.Parse<KnownConcept>(a.Concept), a => a.Keyword);

@@ -218,7 +218,7 @@ namespace General.Language {
                         state.GetExecutionEnvironment<PropertyBasedExecutionEnvironment>()
                                 .ScratchPad[Constants.Builder] = this;
                         var res = KeyAndBuilder(state, false);
-                        return LanguageCommand.Gather(state, res.Key, res.Builder);
+                        return LanguageCommand.Gather(state, res.Key, res.Builder, KeywordBindings);
                 }
 
                 internal dynamic KeyAndBuilder(InterpreterState state, bool advance = true) {

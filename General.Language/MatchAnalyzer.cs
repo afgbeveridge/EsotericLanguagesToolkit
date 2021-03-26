@@ -6,31 +6,31 @@ using Interpreter.Abstractions;
 
 namespace General.Language {
         internal class MatchAnalyzer {
-                private static readonly List<Tuple<string, Func<InterpreterState, string, string>>> AnalysisHelpers =
+                private List<Tuple<string, Func<InterpreterState, string, string>>> AnalysisHelpers { get; } = 
                         new List<Tuple<string, Func<InterpreterState, string, string>>>();
 
-                static MatchAnalyzer() {
+
+                internal MatchAnalyzer(string source, Dictionary<KnownConcept, string> bindings) { 
+                        Source = source;
                         AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>(
                                 string.Concat("-", FlexibleNumeralSystem.CharList), (state, src) => src));
                         AnalysisHelpers.Add(
-                                Tuple.Create<string, Func<InterpreterState, string, string>>("@", (state, src) => src));
+                                Tuple.Create<string, Func<InterpreterState, string, string>>(bindings[KnownConcept.Label], (state, src) => src));
                         AnalysisHelpers.Add(
-                                Tuple.Create<string, Func<InterpreterState, string, string>>("^", (state, src) => src));
+                                Tuple.Create<string, Func<InterpreterState, string, string>>(bindings[KnownConcept.Jump], (state, src) => src));
                         AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>("\"",
                                 (state, src) => src.Substring(1, src.Length - 2)));
-                        AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>("!",
+                        AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>(bindings[KnownConcept.Pop],
                                 (state, src) => state.Stack<BaseInterpreterStack>().Pop<LanguageObject>().AsString()));
                         AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>(
                                 "abcdefghijklmnopqrstuvwxyz",
                                 (state, src) => {
                                         var b = state.GetExecutionEnvironment<PropertyBasedExecutionEnvironment>()[src];
-                                        return b == null ? string.Empty : ((LanguageObject) b).AsString();
+                                        return b == null ? string.Empty : ((LanguageObject)b).AsString();
                                 }));
-                        AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>("~",
+                        AnalysisHelpers.Add(Tuple.Create<string, Func<InterpreterState, string, string>>(bindings[KnownConcept.Quine],
                                 (state, src) => string.Join(Environment.NewLine, state.Source().Content)));
                 }
-
-                internal MatchAnalyzer(string src) => Source = src;
 
                 internal string Source { get; set; }
 

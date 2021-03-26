@@ -49,7 +49,7 @@ namespace General.Language {
                                                         Builder.Create(
                                                                 (stat, src, st) =>
                                                                         new LabelCommand().ExecuteAsync(stat, src, st),
-                                                                LabelCommand.SimpleLabel)).ApplyAsync(state);
+                                                                LabelCommand.SimpleLabel), KeywordBindings).ApplyAsync(state);
                                 }
                         } while (more);
 

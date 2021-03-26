@@ -47,7 +47,7 @@
 
         private async Task RunAsync() {
                 Output = string.Empty;
-                var cmds = Commands == null ? string.Empty : string.Join(" ", Commands.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+                var cmds = Commands == null ? string.Empty : string.Join(" ", Commands.Select(kvp => $"{kvp.Key}\\{kvp.Value}"));
                 await JS.InvokeAsync<object>("websocketInterop.send", $"|{Language}|{SourceCode}|{cmds}");
         }
 

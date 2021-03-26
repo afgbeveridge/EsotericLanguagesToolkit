@@ -27,13 +27,13 @@ namespace General.Language {
                 }
 
                 internal static ActionCommand<PropertyBasedExecutionEnvironment> Gather(InterpreterState state,
-                        string key, Builder bld) {
+                        string key, Builder bld, Dictionary<KnownConcept, string> bindings) {
                         ExecutionSupport.Emit(() => string.Format("Command created: {0}, Source Position {1}", key,
                                 state.Source().SourcePosition));
                         state.Source().Advance();
                         var cmd = new ActionCommand<PropertyBasedExecutionEnvironment>(bld.Action, key);
                         if (bld.Expression != null) {
-                                var a = bld.Examine(state, key);
+                                var a = bld.Examine(state, key, bindings);
                                 Action<LanguageObject> pushIfNonEmpty = o => {
                                         if (o != null && !string.IsNullOrEmpty(o.AsString()))
                                                 cmd.ExecutionContext.Enqueue(o);
