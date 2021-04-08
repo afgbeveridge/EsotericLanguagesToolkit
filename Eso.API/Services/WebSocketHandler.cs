@@ -22,7 +22,6 @@ namespace Eso.API.Services {
                 public Task<IWebSocketHandler> Host(WebSocket socket) {
                         Channel = socket;
                         LocalToken = new CancellationTokenSource();
-                        var token = LocalToken.Token;
                         return Task.FromResult((IWebSocketHandler) this);
                 }
 

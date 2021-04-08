@@ -42,9 +42,9 @@ namespace BrainFuck.Language {
                         Commands['>'] = async (state, source, stack) => await WrapAsAsync(() => stack.Advance());
                         Commands['<'] = async (state, source, stack) => await WrapAsAsync(() => stack.Retreat());
                         Commands['+'] = async (state, source, stack) =>
-                                await WrapAsAsync(() => stack.CurrentCell = stack.CurrentCell + new CanonicalNumber(1));
+                                await WrapAsAsync(() => stack.CurrentCell += new CanonicalNumber(1));
                         Commands['-'] = async (state, source, stack) =>
-                                await WrapAsAsync(() => stack.CurrentCell = stack.CurrentCell + new CanonicalNumber(-1));
+                                await WrapAsAsync(() => stack.CurrentCell += new CanonicalNumber(-1));
                         Commands['.'] = async (state, source, stack) =>
                                 await Wrapper.WriteAsync(new string(Convert.ToChar(stack.CurrentCell.Value), 1));
                         Commands[','] = async (state, source, stack) => stack.CurrentCell.Value = await Wrapper.ReadCharacterAsync();

@@ -14,9 +14,9 @@ class UpdateQueueHandler(AbstractQueueHandler):
     def must_exist(self):
         return False
 
-    def process(self, definition):
-        definition[UPDATE_URL] = content[UPDATE_URL]
-        definition[UPDATE_MODIFIED] = content[UPDATE_MODIFIED]
-        definition[UPDATE_TURING_COMPLETE] = content[UPDATE_TURING_COMPLETE]
-        print('Last update was {}'.format(content[UPDATE_LAST_UPDATE]))
+    def process(self, payload, definition):
+        definition[UPDATE_URL] = payload[UPDATE_URL]
+        definition[UPDATE_MODIFIED] = payload[UPDATE_MODIFIED]
+        definition[UPDATE_TURING_COMPLETE] = payload[UPDATE_TURING_COMPLETE]
+        print('Last update was {}'.format(payload[UPDATE_LAST_UPDATE]))
         definition[UPDATE_LAST_UPDATE] = datetime.datetime.now()

@@ -15,7 +15,7 @@ class ExecutionQueueHandler(AbstractQueueHandler):
     def must_exist(self):
         return True
 
-    def process(self, definition):
+    def process(self, payload, definition):
         definition[EXECUTION_LAST] = datetime.datetime.now()
         cnt = definition[EXECUTION_COUNT]
         definition[EXECUTION_COUNT] = int(cnt) + 1 if cnt is not None else 1

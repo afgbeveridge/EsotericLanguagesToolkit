@@ -34,7 +34,7 @@ namespace General.Language {
                         var cmd = new ActionCommand<PropertyBasedExecutionEnvironment>(bld.Action, key);
                         if (bld.Expression != null) {
                                 var a = bld.Examine(state, key, bindings);
-                                Action<LanguageObject> pushIfNonEmpty = o => {
+                                void pushIfNonEmpty(LanguageObject o) {
                                         if (o != null && !string.IsNullOrEmpty(o.AsString()))
                                                 cmd.ExecutionContext.Enqueue(o);
                                 };

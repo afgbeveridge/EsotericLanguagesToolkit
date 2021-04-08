@@ -17,7 +17,7 @@ class AbstractQueueHandler:
         pass
 
     @abstractmethod
-    def process(self, definition):
+    def process(self, payload, definition):
         pass
 
     def handle(self, body):
@@ -32,7 +32,7 @@ class AbstractQueueHandler:
                 print('New language {}'.format(name))
                 definition = content
             else:
-                self.process(definition)
+                self.process(content, definition)
             repo.write_language_definition(name, definition)
         except KeyError:
             print('Key error handling update')
