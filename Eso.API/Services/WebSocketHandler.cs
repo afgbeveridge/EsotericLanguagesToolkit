@@ -6,18 +6,32 @@ using System.Threading;
 using System.Threading.Tasks;
 using Common;
 using General.Language;
+using Microsoft.Extensions.Configuration;
+using System.Text.Json;
 
 namespace Eso.API.Services {
         public class WebSocketHandler : IWebSocketHandler {
 
                 private const string Generalized = "*";
 
-                public WebSocketHandler(IPluginService pluginService) => PluginHandler = pluginService;
+                
+
+                private const string QueueName = "LangExecution";
+
+                public WebSocketHandler(IPluginService pluginService, IQueueSink sink, IConfiguration cfg) {
+                        PluginHandler = pluginService;
+                        Sink = sink;
+                        Config = cfg;
+                }
 
                 private WebSocket Channel { get; set; }
                 private CancellationTokenSource LocalToken { get; set; }
                 private IPluginService PluginHandler { get; }
                 private string Language { get; set; }
+
+                private IConfiguration Config { get; }
+
+                private IQueueSink Sink { get; }
 
                 public Task<IWebSocketHandler> Host(WebSocket socket) {
                         Channel = socket;
@@ -29,6 +43,7 @@ namespace Eso.API.Services {
                         var wrapper = new LocalIOWrapper(Channel, LocalToken);
                         var bundle = await GetLanguagSourceAndPossiblyCommands(wrapper);
                         var processor = LocateProcessor(bundle);
+                        await NotifyExecution(bundle);
                         await processor.InterpretAsync(wrapper, new[] { bundle.Source });
                         await Channel.CloseAsync(WebSocketCloseStatus.NormalClosure, "Execution complete",
                                 LocalToken.Token);
@@ -68,6 +83,11 @@ namespace Eso.API.Services {
                                 interp.UseBindings(bundle.Commands);
                         }
                         return processor;
+                }
+
+                private async Task NotifyExecution(SourceBundle bundle) {
+                        var payload = JsonSerializer.Serialize(new { name = bundle.Language }); // Note lower case property name
+                        await Sink.UsingConfiguration(Config).PublishAsync("LangExecution", payload);
                 }
 
                 private class SourceBundle {

@@ -15,6 +15,8 @@ namespace Eso.API {
                 // This method gets called by the runtime. Use this method to add services to the container.
                 public void ConfigureServices(IServiceCollection services) {
                         services.AddControllers();
+                        services.AddSingleton(provider => Configuration);
+                        services.AddSingleton<IQueueSink, RabbitMQSink>();
                         services.AddTransient<IWebSocketHandler, WebSocketHandler>();
                         services.AddTransient<IPluginService, PluginService>();
                         PluginService.Configure();
