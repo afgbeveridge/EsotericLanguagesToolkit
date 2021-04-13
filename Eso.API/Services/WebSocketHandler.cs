@@ -14,7 +14,7 @@ namespace Eso.API.Services {
 
                 private const string Generalized = "*";
 
-                private const string QueueName = "LangExecution";
+                private const string ExchangeName = "amq.fanout";
 
                 public WebSocketHandler(IPluginService pluginService, IQueueSink sink, IConfiguration cfg) {
                         PluginHandler = pluginService;
@@ -85,7 +85,7 @@ namespace Eso.API.Services {
 
                 private async Task NotifyExecution(SourceBundle bundle) {
                         var payload = JsonSerializer.Serialize(new { name = bundle.Language }); // Note lower case property name
-                        await Sink.UsingConfiguration(Config).PublishAsync(QueueName, payload);
+                        await Sink.UsingConfiguration(Config).PublishToExchangeAsync(ExchangeName, payload);
                 }
 
                 private class SourceBundle {

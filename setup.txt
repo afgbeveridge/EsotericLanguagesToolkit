@@ -5,7 +5,7 @@ docker run -p 3306:3306 --name eso-mysql -e MYSQL_ROOT_PASSWORD=pass123 -d mysql
 
 Python
 pip install -r requirements. txt
-Set up rabbit queues, default exchange, LangUpdate and LangExecution
+Set up rabbit queues, default exchange, LangUpdate, LangExecution, LangStatistics. Bind LangStatistics and LangExecution to amq.fanout
 activate.bat
 python app.py in cmd window
 
