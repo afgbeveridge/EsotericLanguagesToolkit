@@ -1,0 +1,1852 @@
+Command created: +, Source Position x = 0, y = 0
+Command input parsed: A
+Object pushed onto stack(1): A
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command +
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 2, y = 0
+Command input parsed: "Enter start: "
+Object pushed onto stack(1): Enter start: 
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ,, Source Position x = 18, y = 0
+Command input parsed: l
+Object pushed onto stack(1): l
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 5
+Post-execution: ActionCommand`1 - command ,
+
+Stack size == 1, tos => 
+5
+.................
+
+Command created: =, Source Position x = 20, y = 0
+1 object(s) popped from stack, size now == 0
+Command input parsed: cu!
+Object pushed onto stack(1): 5
+Object pushed onto stack(2): cu
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Set variable: cu == 5
+Post-execution: ActionCommand`1 - command =
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 24, y = 0
+Command input parsed: "Primes <= "
+Object pushed onto stack(1): Primes <= 
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 37, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 5
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 40, y = 0
+Command input parsed: "\n"
+Object pushed onto stack(1): \n
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: :, Source Position x = 45, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 5
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 5
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+5
+.................
+
+Command created: :, Source Position x = 48, y = 0
+Command input parsed: 2
+Object pushed onto stack(2): 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: ?, Source Position x = 50, y = 0
+Command input parsed: -1
+Object pushed onto stack(2): -1
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 54, y = 0
+Command input parsed: .e@o*cu$!2=ca!@i*cu#!ca?0?^.n<ca1:ca:1?1?^.i)cu)" "@n<cu1*cu<!1^!o@e
+Comparison: -1 == 1?
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: +, Source Position x = 0, y = 0
+Command input parsed: A
+Object pushed onto stack(1): A
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command +
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 2, y = 0
+Command input parsed: "Enter start: "
+Object pushed onto stack(1): Enter start: 
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ,, Source Position x = 18, y = 0
+Command input parsed: l
+Object pushed onto stack(1): l
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 9
+Post-execution: ActionCommand`1 - command ,
+
+Stack size == 1, tos => 
+9
+.................
+
+Command created: =, Source Position x = 20, y = 0
+1 object(s) popped from stack, size now == 0
+Command input parsed: cu!
+Object pushed onto stack(1): 9
+Object pushed onto stack(2): cu
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Set variable: cu == 9
+Post-execution: ActionCommand`1 - command =
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 24, y = 0
+Command input parsed: "Primes <= "
+Object pushed onto stack(1): Primes <= 
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 37, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 9
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 40, y = 0
+Command input parsed: "\n"
+Object pushed onto stack(1): \n
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: :, Source Position x = 45, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 9
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 9
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+9
+.................
+
+Command created: :, Source Position x = 48, y = 0
+Command input parsed: 2
+Object pushed onto stack(2): 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: ?, Source Position x = 50, y = 0
+Command input parsed: -1
+Object pushed onto stack(2): -1
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 54, y = 0
+Command input parsed: .e
+Comparison: -1 == 1?
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 57, y = 0
+Command input parsed: o
+Object pushed onto stack(1): o
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 59, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 9
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 9
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+9
+.................
+
+Command created: $, Source Position x = 62, y = 0
+Command input parsed: !2
+Object pushed onto stack(2): 2
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 4
+Post-execution: ActionCommand`1 - command $
+
+Stack size == 1, tos => 
+4
+.................
+
+Command created: =, Source Position x = 65, y = 0
+1 object(s) popped from stack, size now == 0
+Command input parsed: ca!
+Object pushed onto stack(1): 4
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Set variable: ca == 4
+Post-execution: ActionCommand`1 - command =
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 69, y = 0
+Command input parsed: i
+Object pushed onto stack(1): i
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 71, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 9
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 9
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+9
+.................
+
+Command created: #, Source Position x = 74, y = 0
+Getting variable: ca
+Command input parsed: !ca
+Object pushed onto stack(2): 4
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command #
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: ?, Source Position x = 78, y = 0
+Command input parsed: 0
+Object pushed onto stack(2): 0
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 81, y = 0
+Command input parsed: .n
+Comparison: 0 == 1?
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 84, y = 0
+Command input parsed: ca1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: ca
+Set variable: ca == 3
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: :, Source Position x = 88, y = 0
+Getting variable: ca
+Command input parsed: ca
+Object pushed onto stack(1): 3
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 3
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+3
+.................
+
+Command created: :, Source Position x = 91, y = 0
+Command input parsed: 1
+Object pushed onto stack(2): 1
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: ?, Source Position x = 93, y = 0
+Command input parsed: 1
+Object pushed onto stack(2): 1
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 96, y = 0
+Command input parsed: .i
+Comparison: 1 == 1?
+Object pushed onto stack(1): i
+Object pushed onto stack(2): .
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 71, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 9
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 9
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+9
+.................
+
+Command created: #, Source Position x = 74, y = 0
+Getting variable: ca
+Command input parsed: !ca
+Object pushed onto stack(2): 3
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 0
+Post-execution: ActionCommand`1 - command #
+
+Stack size == 1, tos => 
+0
+.................
+
+Command created: ?, Source Position x = 78, y = 0
+Command input parsed: 0
+Object pushed onto stack(2): 0
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 81, y = 0
+Command input parsed: .n
+Comparison: 0 == 0?
+Object pushed onto stack(1): n
+Object pushed onto stack(2): .
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: @, Source Position x = 106, y = 0
+Command input parsed: n
+Object pushed onto stack(1): n
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 121, y = 0
+Command input parsed: e
+Object pushed onto stack(1): e
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 108, y = 0
+Command input parsed: cu1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): cu
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: cu
+Set variable: cu == 8
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 112, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 8
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 8
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+8
+.................
+
+Command created: <, Source Position x = 115, y = 0
+Command input parsed: !1
+Object pushed onto stack(2): 1
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 7
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 1, tos => 
+7
+.................
+
+Command created: ^, Source Position x = 118, y = 0
+Command input parsed: !o
+Object pushed onto stack(2): o
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 59, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 8
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 8
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+8
+.................
+
+Command created: $, Source Position x = 62, y = 0
+Command input parsed: !2
+Object pushed onto stack(2): 2
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 4
+Post-execution: ActionCommand`1 - command $
+
+Stack size == 1, tos => 
+4
+.................
+
+Command created: =, Source Position x = 65, y = 0
+1 object(s) popped from stack, size now == 0
+Command input parsed: ca!
+Object pushed onto stack(1): 4
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Set variable: ca == 4
+Post-execution: ActionCommand`1 - command =
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 69, y = 0
+Command input parsed: i
+Object pushed onto stack(1): i
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 71, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 8
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 8
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+8
+.................
+
+Command created: #, Source Position x = 74, y = 0
+Getting variable: ca
+Command input parsed: !ca
+Object pushed onto stack(2): 4
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 0
+Post-execution: ActionCommand`1 - command #
+
+Stack size == 1, tos => 
+0
+.................
+
+Command created: ?, Source Position x = 78, y = 0
+Command input parsed: 0
+Object pushed onto stack(2): 0
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 81, y = 0
+Command input parsed: .n
+Comparison: 0 == 0?
+Object pushed onto stack(1): n
+Object pushed onto stack(2): .
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 108, y = 0
+Command input parsed: cu1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): cu
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: cu
+Set variable: cu == 7
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 112, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 7
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 7
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+7
+.................
+
+Command created: <, Source Position x = 115, y = 0
+Command input parsed: !1
+Object pushed onto stack(2): 1
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 6
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 1, tos => 
+6
+.................
+
+Command created: ^, Source Position x = 118, y = 0
+Command input parsed: !o
+Object pushed onto stack(2): o
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 59, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 7
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 7
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+7
+.................
+
+Command created: $, Source Position x = 62, y = 0
+Command input parsed: !2
+Object pushed onto stack(2): 2
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 3
+Post-execution: ActionCommand`1 - command $
+
+Stack size == 1, tos => 
+3
+.................
+
+Command created: =, Source Position x = 65, y = 0
+1 object(s) popped from stack, size now == 0
+Command input parsed: ca!
+Object pushed onto stack(1): 3
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Set variable: ca == 3
+Post-execution: ActionCommand`1 - command =
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 69, y = 0
+Command input parsed: i
+Object pushed onto stack(1): i
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 71, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 7
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 7
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+7
+.................
+
+Command created: #, Source Position x = 74, y = 0
+Getting variable: ca
+Command input parsed: !ca
+Object pushed onto stack(2): 3
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command #
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: ?, Source Position x = 78, y = 0
+Command input parsed: 0
+Object pushed onto stack(2): 0
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 81, y = 0
+Command input parsed: .n
+Comparison: 0 == 1?
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 84, y = 0
+Command input parsed: ca1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: ca
+Set variable: ca == 2
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: :, Source Position x = 88, y = 0
+Getting variable: ca
+Command input parsed: ca
+Object pushed onto stack(1): 2
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 2
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+2
+.................
+
+Command created: :, Source Position x = 91, y = 0
+Command input parsed: 1
+Object pushed onto stack(2): 1
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: ?, Source Position x = 93, y = 0
+Command input parsed: 1
+Object pushed onto stack(2): 1
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 96, y = 0
+Command input parsed: .i
+Comparison: 1 == 1?
+Object pushed onto stack(1): i
+Object pushed onto stack(2): .
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 71, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 7
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 7
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+7
+.................
+
+Command created: #, Source Position x = 74, y = 0
+Getting variable: ca
+Command input parsed: !ca
+Object pushed onto stack(2): 2
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command #
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: ?, Source Position x = 78, y = 0
+Command input parsed: 0
+Object pushed onto stack(2): 0
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 81, y = 0
+Command input parsed: .n
+Comparison: 0 == 1?
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 84, y = 0
+Command input parsed: ca1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: ca
+Set variable: ca == 1
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: :, Source Position x = 88, y = 0
+Getting variable: ca
+Command input parsed: ca
+Object pushed onto stack(1): 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: :, Source Position x = 91, y = 0
+Command input parsed: 1
+Object pushed onto stack(2): 1
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 0
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+0
+.................
+
+Command created: ?, Source Position x = 93, y = 0
+Command input parsed: 1
+Object pushed onto stack(2): 1
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 96, y = 0
+Command input parsed: .i
+Comparison: 1 == 0?
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 99, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 7
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 102, y = 0
+Command input parsed: " "
+Object pushed onto stack(1):  
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 106, y = 0
+Command input parsed: n
+Object pushed onto stack(1): n
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 108, y = 0
+Command input parsed: cu1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): cu
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: cu
+Set variable: cu == 6
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 112, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 6
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 6
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+6
+.................
+
+Command created: <, Source Position x = 115, y = 0
+Command input parsed: !1
+Object pushed onto stack(2): 1
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 5
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 1, tos => 
+5
+.................
+
+Command created: ^, Source Position x = 118, y = 0
+Command input parsed: !o
+Object pushed onto stack(2): o
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 59, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 6
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 6
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+6
+.................
+
+Command created: $, Source Position x = 62, y = 0
+Command input parsed: !2
+Object pushed onto stack(2): 2
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 3
+Post-execution: ActionCommand`1 - command $
+
+Stack size == 1, tos => 
+3
+.................
+
+Command created: =, Source Position x = 65, y = 0
+1 object(s) popped from stack, size now == 0
+Command input parsed: ca!
+Object pushed onto stack(1): 3
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Set variable: ca == 3
+Post-execution: ActionCommand`1 - command =
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 69, y = 0
+Command input parsed: i
+Object pushed onto stack(1): i
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 71, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 6
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 6
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+6
+.................
+
+Command created: #, Source Position x = 74, y = 0
+Getting variable: ca
+Command input parsed: !ca
+Object pushed onto stack(2): 3
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 0
+Post-execution: ActionCommand`1 - command #
+
+Stack size == 1, tos => 
+0
+.................
+
+Command created: ?, Source Position x = 78, y = 0
+Command input parsed: 0
+Object pushed onto stack(2): 0
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 81, y = 0
+Command input parsed: .n
+Comparison: 0 == 0?
+Object pushed onto stack(1): n
+Object pushed onto stack(2): .
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 108, y = 0
+Command input parsed: cu1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): cu
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: cu
+Set variable: cu == 5
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 112, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 5
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 5
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+5
+.................
+
+Command created: <, Source Position x = 115, y = 0
+Command input parsed: !1
+Object pushed onto stack(2): 1
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 4
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 1, tos => 
+4
+.................
+
+Command created: ^, Source Position x = 118, y = 0
+Command input parsed: !o
+Object pushed onto stack(2): o
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 59, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 5
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 5
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+5
+.................
+
+Command created: $, Source Position x = 62, y = 0
+Command input parsed: !2
+Object pushed onto stack(2): 2
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 2
+Post-execution: ActionCommand`1 - command $
+
+Stack size == 1, tos => 
+2
+.................
+
+Command created: =, Source Position x = 65, y = 0
+1 object(s) popped from stack, size now == 0
+Command input parsed: ca!
+Object pushed onto stack(1): 2
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Set variable: ca == 2
+Post-execution: ActionCommand`1 - command =
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 69, y = 0
+Command input parsed: i
+Object pushed onto stack(1): i
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 71, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 5
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 5
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+5
+.................
+
+Command created: #, Source Position x = 74, y = 0
+Getting variable: ca
+Command input parsed: !ca
+Object pushed onto stack(2): 2
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command #
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: ?, Source Position x = 78, y = 0
+Command input parsed: 0
+Object pushed onto stack(2): 0
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 81, y = 0
+Command input parsed: .n
+Comparison: 0 == 1?
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 84, y = 0
+Command input parsed: ca1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: ca
+Set variable: ca == 1
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: :, Source Position x = 88, y = 0
+Getting variable: ca
+Command input parsed: ca
+Object pushed onto stack(1): 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: :, Source Position x = 91, y = 0
+Command input parsed: 1
+Object pushed onto stack(2): 1
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 0
+Post-execution: ActionCommand`1 - command :
+
+Stack size == 1, tos => 
+0
+.................
+
+Command created: ?, Source Position x = 93, y = 0
+Command input parsed: 1
+Object pushed onto stack(2): 1
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 96, y = 0
+Command input parsed: .i
+Comparison: 1 == 0?
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 99, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 5
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: ), Source Position x = 102, y = 0
+Command input parsed: " "
+Object pushed onto stack(1):  
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command )
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 106, y = 0
+Command input parsed: n
+Object pushed onto stack(1): n
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 108, y = 0
+Command input parsed: cu1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): cu
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: cu
+Set variable: cu == 4
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 112, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 4
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 4
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+4
+.................
+
+Command created: <, Source Position x = 115, y = 0
+Command input parsed: !1
+Object pushed onto stack(2): 1
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 3
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 1, tos => 
+3
+.................
+
+Command created: ^, Source Position x = 118, y = 0
+Command input parsed: !o
+Object pushed onto stack(2): o
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 59, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 4
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 4
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+4
+.................
+
+Command created: $, Source Position x = 62, y = 0
+Command input parsed: !2
+Object pushed onto stack(2): 2
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 2
+Post-execution: ActionCommand`1 - command $
+
+Stack size == 1, tos => 
+2
+.................
+
+Command created: =, Source Position x = 65, y = 0
+1 object(s) popped from stack, size now == 0
+Command input parsed: ca!
+Object pushed onto stack(1): 2
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Set variable: ca == 2
+Post-execution: ActionCommand`1 - command =
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 69, y = 0
+Command input parsed: i
+Object pushed onto stack(1): i
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 71, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 4
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 4
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+4
+.................
+
+Command created: #, Source Position x = 74, y = 0
+Getting variable: ca
+Command input parsed: !ca
+Object pushed onto stack(2): 2
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 0
+Post-execution: ActionCommand`1 - command #
+
+Stack size == 1, tos => 
+0
+.................
+
+Command created: ?, Source Position x = 78, y = 0
+Command input parsed: 0
+Object pushed onto stack(2): 0
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 81, y = 0
+Command input parsed: .n
+Comparison: 0 == 0?
+Object pushed onto stack(1): n
+Object pushed onto stack(2): .
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 108, y = 0
+Command input parsed: cu1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): cu
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: cu
+Set variable: cu == 3
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 112, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 3
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 3
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+3
+.................
+
+Command created: <, Source Position x = 115, y = 0
+Command input parsed: !1
+Object pushed onto stack(2): 1
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 2
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 1, tos => 
+2
+.................
+
+Command created: ^, Source Position x = 118, y = 0
+Command input parsed: !o
+Object pushed onto stack(2): o
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 59, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 3
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 3
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+3
+.................
+
+Command created: $, Source Position x = 62, y = 0
+Command input parsed: !2
+Object pushed onto stack(2): 2
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command $
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: =, Source Position x = 65, y = 0
+1 object(s) popped from stack, size now == 0
+Command input parsed: ca!
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Set variable: ca == 1
+Post-execution: ActionCommand`1 - command =
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 69, y = 0
+Command input parsed: i
+Object pushed onto stack(1): i
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 71, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 3
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 3
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+3
+.................
+
+Command created: #, Source Position x = 74, y = 0
+Getting variable: ca
+Command input parsed: !ca
+Object pushed onto stack(2): 1
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 0
+Post-execution: ActionCommand`1 - command #
+
+Stack size == 1, tos => 
+0
+.................
+
+Command created: ?, Source Position x = 78, y = 0
+Command input parsed: 0
+Object pushed onto stack(2): 0
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 81, y = 0
+Command input parsed: .n
+Comparison: 0 == 0?
+Object pushed onto stack(1): n
+Object pushed onto stack(2): .
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 108, y = 0
+Command input parsed: cu1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): cu
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: cu
+Set variable: cu == 2
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 112, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 2
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 2
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+2
+.................
+
+Command created: <, Source Position x = 115, y = 0
+Command input parsed: !1
+Object pushed onto stack(2): 1
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: ^, Source Position x = 118, y = 0
+Command input parsed: !o
+Object pushed onto stack(2): o
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 59, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 2
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 2
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+2
+.................
+
+Command created: $, Source Position x = 62, y = 0
+Command input parsed: !2
+Object pushed onto stack(2): 2
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command $
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: =, Source Position x = 65, y = 0
+1 object(s) popped from stack, size now == 0
+Command input parsed: ca!
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): ca
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Set variable: ca == 1
+Post-execution: ActionCommand`1 - command =
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 69, y = 0
+Command input parsed: i
+Object pushed onto stack(1): i
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 71, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 2
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 2
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+2
+.................
+
+Command created: #, Source Position x = 74, y = 0
+Getting variable: ca
+Command input parsed: !ca
+Object pushed onto stack(2): 1
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 0
+Post-execution: ActionCommand`1 - command #
+
+Stack size == 1, tos => 
+0
+.................
+
+Command created: ?, Source Position x = 78, y = 0
+Command input parsed: 0
+Object pushed onto stack(2): 0
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Command created: ^, Source Position x = 81, y = 0
+Command input parsed: .n
+Comparison: 0 == 0?
+Object pushed onto stack(1): n
+Object pushed onto stack(2): .
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Post-execution: ActionCommand`1 - command ?
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: <, Source Position x = 108, y = 0
+Command input parsed: cu1
+Object pushed onto stack(1): 1
+Object pushed onto stack(2): cu
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Getting variable: cu
+Set variable: cu == 1
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: *, Source Position x = 112, y = 0
+Getting variable: cu
+Command input parsed: cu
+Object pushed onto stack(1): 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 1
+Post-execution: ActionCommand`1 - command *
+
+Stack size == 1, tos => 
+1
+.................
+
+Command created: <, Source Position x = 115, y = 0
+Command input parsed: !1
+Object pushed onto stack(2): 1
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Object pushed onto stack(1): 0
+Post-execution: ActionCommand`1 - command <
+
+Stack size == 1, tos => 
+0
+.................
+
+Command created: ^, Source Position x = 118, y = 0
+Command input parsed: !o
+Object pushed onto stack(2): o
+Object pushed onto stack(3): !
+1 object(s) popped from stack, size now == 2
+1 object(s) popped from stack, size now == 1
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command ^
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
+Command created: @, Source Position x = 121, y = 0
+Command input parsed: e
+Object pushed onto stack(1): e
+1 object(s) popped from stack, size now == 0
+Post-execution: ActionCommand`1 - command @
+
+Stack size == 0, tos => 
+<Empty>
+.................
+
