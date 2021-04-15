@@ -8,6 +8,8 @@ using Common;
 using General.Language;
 using Microsoft.Extensions.Configuration;
 using System.Text.Json;
+using System.Diagnostics;
+using Eso.API.Models;
 
 namespace Eso.API.Services {
         public class WebSocketHandler : IWebSocketHandler {
@@ -31,6 +33,8 @@ namespace Eso.API.Services {
 
                 private IQueueSink Sink { get; }
 
+                private Stopwatch Timer { get; } = new Stopwatch(); 
+
                 public Task<IWebSocketHandler> Host(WebSocket socket) {
                         Channel = socket;
                         LocalToken = new CancellationTokenSource();
@@ -41,10 +45,12 @@ namespace Eso.API.Services {
                         var wrapper = new LocalIOWrapper(Channel, LocalToken);
                         var bundle = await GetLanguagSourceAndPossiblyCommands(wrapper);
                         var processor = LocateProcessor(bundle);
-                        await NotifyExecution(bundle);
+                        Timer.Start();
                         await processor.InterpretAsync(wrapper, new[] { bundle.Source });
+                        Timer.Stop();
                         await Channel.CloseAsync(WebSocketCloseStatus.NormalClosure, "Execution complete",
                                 LocalToken.Token);
+                        await NotifyExecution(bundle);
                 }
 
                 private async Task<SourceBundle> GetLanguagSourceAndPossiblyCommands(LocalIOWrapper wrapper) {
@@ -84,7 +90,13 @@ namespace Eso.API.Services {
                 }
 
                 private async Task NotifyExecution(SourceBundle bundle) {
-                        var payload = JsonSerializer.Serialize(new { name = bundle.Language }); // Note lower case property name
+                        var stats = new StatisticsResult { 
+                                Name = bundle.Language,
+                                SourceCodeLength = (bundle.Source ?? string.Empty).Length,
+                                ExecutionTimeMilliseconds = Timer.ElapsedMilliseconds
+                        };
+                        // Note camel case property name
+                        var payload = JsonSerializer.Serialize(stats, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }); 
                         await Sink.UsingConfiguration(Config).PublishToExchangeAsync(ExchangeName, payload);
                 }
 

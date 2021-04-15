@@ -53,7 +53,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eso.Blazor.SPA.Shared", "Es
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eso.API.Editor.Models", "Eso.API.Editor.Models\Eso.API.Editor.Models.csproj", "{C5AA633D-C8F8-449B-BE90-834AC0CC6ABE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generalized.Interpreter", "Generalized.Interpreter\Generalized.Interpreter.csproj", "{2AD07A7C-7ED4-46CA-AC1F-48AF88646DB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generalized.Interpreter", "Generalized.Interpreter\Generalized.Interpreter.csproj", "{2AD07A7C-7ED4-46CA-AC1F-48AF88646DB6}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Eso.API.Statistics", "Eso.API.Statistics\Eso.API.Statistics.pyproj", "{D22D4713-CF53-4A0B-802A-1A62AB799898}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -315,6 +317,12 @@ Global
 		{2AD07A7C-7ED4-46CA-AC1F-48AF88646DB6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2AD07A7C-7ED4-46CA-AC1F-48AF88646DB6}.Release|x86.ActiveCfg = Release|Any CPU
 		{2AD07A7C-7ED4-46CA-AC1F-48AF88646DB6}.Release|x86.Build.0 = Release|Any CPU
+		{D22D4713-CF53-4A0B-802A-1A62AB799898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D22D4713-CF53-4A0B-802A-1A62AB799898}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D22D4713-CF53-4A0B-802A-1A62AB799898}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D22D4713-CF53-4A0B-802A-1A62AB799898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D22D4713-CF53-4A0B-802A-1A62AB799898}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D22D4713-CF53-4A0B-802A-1A62AB799898}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

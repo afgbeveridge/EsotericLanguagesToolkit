@@ -205,7 +205,7 @@ namespace General.Language {
                                 .EndMatching().ToRegex();
                         JumpCommand.LabelExpression = RegexBuilder.New()
                                 .StartsWith().StartCaptureGroup("var").Include("objectReference").Or.Escape.Literal(KeywordBindings[KnownConcept.Pop]).Or
-                                .Escape.Literal(KeywordBindings[KnownConcept.CurrentStack]).Or.Escape.Literal($"\\{KeywordBindings[KnownConcept.Period]}")
+                                .Escape.Literal(KeywordBindings[KnownConcept.CurrentStack]).Or.Escape.Literal($"{KeywordBindings[KnownConcept.Period]}")
                                 .EndCaptureGroup().Include("label").EndMatching().ToRegex();
                 }
 

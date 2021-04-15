@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: sanic-routing
+Version: 0.5.2
+Summary: Core routing component for Sanic
+Home-page: https://github.com/sanic-org/sanic-routing/
+Author: Adam Hopkins
+Author-email: admhpkns@gmail.com
+License: MIT
+Platform: any
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Web Environment
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Description-Content-Type: text/markdown
+
+# Sanic Routing
+
+Internal handler routing for Sanic beginning with v21.3.
+
+
