@@ -61,7 +61,7 @@ namespace Eso.API.Services {
                         return new SourceBundle {
                                 Language = src[1..end],
                                 Source = src[(end + 1)..(cmds - 1)],
-                                Commands = CreateCommands(cmds >= src.Length ? null : src[cmds..])
+                                Commands = CreateCommands(cmds >= src.Length - 1 ? null : src[cmds..])
                         };
                 }
 
