@@ -1,4 +1,6 @@
-A generalized interpreter toolkit for esoteric languages, written in/using C# 8, .NET Core, Blazor, Python, Docker, mysql, RabbitMQ. 
+A generalized interpreter toolkit for esoteric languages, written in/using C# 8, .NET Core, Blazor, Python, 
+Docker, mysql, Rabbitmq, mongodb, sanic, pandas. 
+
 See setup.txt for environment details.
 
 Some languages are natively supplied, others can be created using the Blazor client.
