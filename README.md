@@ -26,7 +26,7 @@ See setup.txt for environment details.
 # Microcosm
 Note that this project is also a microcosm of microservices (if you will).
 
-For example, the statistics and discovery services are both written in python. However, they approach storage and RabbitMq connectively differently.
+For example, the statistics and discovery services are both written in python. However, they approach storage and RabbitMq connectivity differently.
 
 The stats api (which is still a WIP), uses Celery to start a worker, and MongoDB as its persistent store. The discovery API uses JSON files for storage, and uses Python threads to 
 handle RabbitMq communications.
