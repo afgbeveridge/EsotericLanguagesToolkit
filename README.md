@@ -1,11 +1,13 @@
+# Overview
+
 A generalized interpreter toolkit for esoteric languages, written in/using C# 8, .NET Core, Blazor, Python, 
 Docker, mysql, Rabbitmq, mongodb, sanic, pandas. 
 
-See setup.txt for environment details.
+You can create your own esoteric language based on changing the keyword mappings of a generalized eso language.
 
-Some languages are natively supplied, others can be created using the Blazor client.
+Some languages are supplied as standard, others can be created using the Blazor client.
 
-Natively supported:
+Directly supported:
 
 * FALSE language (http://strlen.com/false/false.txt)
 * BrainFuck (recent, stable) (http://en.wikipedia.org/wiki/Brainfuck)
@@ -17,3 +19,14 @@ Site maintainers blog: http://tb-it.blogspot.com/
 
 Please be aware that this software is released under an MIT license.
 
+# Set up
+
+See setup.txt for environment details.
+
+# Microcosm
+Note that this project is also a microcosm of microservices (if you will).
+
+For example, the statistics and discovery services are both written in python. However, they approach storage and RabbitMq connectively differently.
+
+The stats api (which is still a WIP), uses Celery to start a worker, and MongoDB as its persistent store. The discovery API uses JSON files for storage, and uses Python threads to 
+handle RabbitMq communications.
