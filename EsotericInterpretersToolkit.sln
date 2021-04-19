@@ -37,8 +37,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deadfish.Language", "Deadfi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Befunge-93.Language", "Befunge-93.Language\Befunge-93.Language.csproj", "{A9A56AC9-4ABA-4C76-9A01-60AA127EF33F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eso.SPA", "Eso.SPA\Eso.SPA.csproj", "{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}"
-EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Eso.API.Discovery", "Eso.API.Discovery\Eso.API.Discovery.pyproj", "{1C32E054-70A5-429A-AB2E-F61574B95AB6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "General.Language", "General.Language\General.Language.csproj", "{67F78231-FBEA-4E0E-8147-D40A29998C37}"
@@ -209,18 +207,6 @@ Global
 		{A9A56AC9-4ABA-4C76-9A01-60AA127EF33F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A9A56AC9-4ABA-4C76-9A01-60AA127EF33F}.Release|x86.ActiveCfg = Release|Any CPU
 		{A9A56AC9-4ABA-4C76-9A01-60AA127EF33F}.Release|x86.Build.0 = Release|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Debug|x86.Build.0 = Debug|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Release|x86.ActiveCfg = Release|Any CPU
-		{C4B43CF6-119E-4CF7-9FDA-2BB37743EB07}.Release|x86.Build.0 = Release|Any CPU
 		{1C32E054-70A5-429A-AB2E-F61574B95AB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1C32E054-70A5-429A-AB2E-F61574B95AB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C32E054-70A5-429A-AB2E-F61574B95AB6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
