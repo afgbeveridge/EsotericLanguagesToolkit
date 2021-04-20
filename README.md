@@ -30,3 +30,5 @@ For example, the statistics and discovery services are both written in python. H
 
 The stats api (which is still a WIP), uses Celery to start a worker, and MongoDB as its persistent store. The discovery API uses JSON files for storage, and uses Python threads to 
 handle RabbitMq communications.
+
+The execution service, on the other hand, is a .net core c# 8 API, using web sockets.
