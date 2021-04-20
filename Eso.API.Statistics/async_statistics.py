@@ -10,11 +10,10 @@ app = Celery(broker='amqp://guest@localhost//')
 #app.conf.task_default_exchange_type = 'direct'
 #app.conf.task_default_queue = 'default'
 
-stats_queue = Queue('LangStatistics', Exchange('amq.fanout'), '', no_declare = True, durable=True)
+# See https://github.com/celery/celery/issues/2979
+app.conf.task_queues = {}
 
-app.conf.task_queues = (
-    stats_queue,
-)
+stats_queue = Queue('LangStatistics', Exchange(''), 'LangStatistics', no_declare = True, durable=True)
 
 class StatisticsConsumerStep(bootsteps.ConsumerStep):
 
