@@ -1,0 +1,62 @@
+﻿@using Eso.Blazor.SPA.Client.Services;
+@using Eso.Blazor.SPA.Shared;
+@inject StatisticsServiceClient StatisticsClient
+
+@if (Statistics != null) {
+        <Heading Size="HeadingSize.Is3" Alignment="TextAlignment.Center">Statistics known for @Language</Heading>
+        <Table>
+                <TableHeader>
+                        <TableRow>
+                                <TableHeaderCell>Statistic</TableHeaderCell>
+                                <TableHeaderCell>Value</TableHeaderCell>
+                        </TableRow>
+                </TableHeader>
+                <TableBody>
+                        <TableRow>
+                                <TableRowCell>Count</TableRowCell>
+                                <TableRowCell>@Statistics.Count</TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                                <TableRowCell>Mean Source Code Length</TableRowCell>
+                                <TableRowCell>@Statistics.MeanSourceCodeLength</TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                                <TableRowCell>Min Source Code Length</TableRowCell>
+                                <TableRowCell>@Statistics.MinSourceCodeLength</TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                                <TableRowCell>Max Source Code Length</TableRowCell>
+                                <TableRowCell>@Statistics.MaxSourceCodeLength</TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                                <TableRowCell>Mean Execution Time Milliseconds</TableRowCell>
+                                <TableRowCell>@Statistics.MeanExecutionTimeMilliseconds</TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                                <TableRowCell>Min Execution Time Milliseconds</TableRowCell>
+                                <TableRowCell>@Statistics.MinExecutionTimeMilliseconds</TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                                <TableRowCell>Max Execution Time Milliseconds</TableRowCell>
+                                <TableRowCell>@Statistics.MaxExecutionTimeMilliseconds</TableRowCell>
+                        </TableRow>
+                </TableBody>
+        </Table>
+}
+
+@code {
+
+        [Parameter]
+        public string Language { get; set; }
+
+        private BasicStatistics Statistics { get; set; }
+
+        protected override async Task OnParametersSetAsync() {
+                Console.WriteLine("Statistics component on parameters set");
+                if (Language != null) {
+                        Statistics = await StatisticsClient.GetStatisticsFor(Language);
+                        StateHasChanged();
+                }
+        }
+
+}

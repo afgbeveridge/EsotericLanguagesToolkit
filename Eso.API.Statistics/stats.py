@@ -4,8 +4,10 @@ from sanic.response import json
 from sanic.response import raw
 from raw_statistics_repo import RawStatisticsRepository
 from functools import partial
+from sanic_cors import CORS, cross_origin
 
 app = Sanic("Eso statistics")
+CORS(app)
 
 # languages known to have stats, with links
 @app.route('/stats')

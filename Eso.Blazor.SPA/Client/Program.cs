@@ -28,6 +28,7 @@ namespace Eso.Blazor.SPA.Client {
 
                         builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:61477") });
                         builder.Services.AddHttpClient<DiscoveryServiceClient>(client => client.BaseAddress = new Uri(builder.Configuration["DiscoveryUrl"]));
+                        builder.Services.AddHttpClient<StatisticsServiceClient>(client => client.BaseAddress = new Uri(builder.Configuration["StatisticsUrl"]));
                         builder.Services.AddScoped<ILanguageService, NewLanguageService>();
                         builder.Services.AddScoped<ILanguageService, ExistingLanguageService>();
 
