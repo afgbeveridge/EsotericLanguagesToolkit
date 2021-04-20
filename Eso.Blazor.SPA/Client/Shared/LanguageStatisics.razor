@@ -52,8 +52,9 @@
         private BasicStatistics Statistics { get; set; }
 
         protected override async Task OnParametersSetAsync() {
-                Console.WriteLine("Statistics component on parameters set");
-                if (Language != null) {
+                if (Language == null)
+                        Statistics = null;
+                else {
                         Statistics = await StatisticsClient.GetStatisticsFor(Language);
                         StateHasChanged();
                 }

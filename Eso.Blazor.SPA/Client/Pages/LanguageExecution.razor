@@ -24,7 +24,7 @@
                                 </Field>
                                 <Paragraph Alignment="TextAlignment.Left">
                                         <Button Color="Color.Primary" Type="ButtonType.Submit" Clicked="RunAsync" Disabled="@(string.IsNullOrWhiteSpace(SourceCode))">Run</Button>
-                                        <Button Color="Color.Primary" Type="ButtonType.Submit">Cancel</Button>
+                                        <Button Color="Color.Primary" Type="ButtonType.Submit" Clicked="FinishAsync">Cancel</Button>
                                 </Paragraph>
 
                                 @if (InputRequired) {
@@ -64,6 +64,13 @@
                 Output = string.Empty;
                 var cmds = Commands == null ? string.Empty : string.Join(" ", Commands.Select(kvp => $"{kvp.Key}\\{kvp.Value}"));
                 await JS.InvokeAsync<object>("websocketInterop.send", $"|{Language}|{SourceCode}|{cmds}");
+        }
+
+        private Task FinishAsync() {
+                Language = null;
+                ShowSelector = true;
+                StateHasChanged();
+                return Task.CompletedTask;
         }
 
         async Task SendInputAsync() {

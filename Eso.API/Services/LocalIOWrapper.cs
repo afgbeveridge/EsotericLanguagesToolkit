@@ -27,6 +27,7 @@ namespace Eso.API.Services {
 
                 private async Task Send(string content) {
                         var outputBuffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes(content));
+                        // TODO: Detect closure here. Need to rmq
                         await Channel.SendAsync(outputBuffer, WebSocketMessageType.Text, true, LocalToken.Token);
                 }
 
@@ -35,6 +36,7 @@ namespace Eso.API.Services {
                                 await Send("\t");
                         var buffer = new byte[2048];
                         var response = await Channel.ReceiveAsync(new ArraySegment<byte>(buffer), LocalToken.Token);
+                        // TODO: Detect closure here. Need to rmq
                         // TODO: Ensure complete message is received
                         return Encoding.ASCII.GetString(buffer, 0, response.Count);
                 }
