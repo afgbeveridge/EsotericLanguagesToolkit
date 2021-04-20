@@ -42,6 +42,9 @@
                         </TableRow>
                 </TableBody>
         </Table>
+        <Paragraph Alignment="TextAlignment.Center">
+                <Button Color="Color.Primary" Clicked="RefreshAsync">Refresh</Button>
+        </Paragraph>
 }
 
 @code {
@@ -54,7 +57,12 @@
         protected override async Task OnParametersSetAsync() {
                 if (Language == null)
                         Statistics = null;
-                else {
+                else 
+                        await RefreshAsync();
+        }
+
+        protected async Task RefreshAsync() {
+                if (Language != null) {
                         Statistics = await StatisticsClient.GetStatisticsFor(Language);
                         StateHasChanged();
                 }

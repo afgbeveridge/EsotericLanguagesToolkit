@@ -8,6 +8,9 @@ using Common;
 
 namespace Eso.API.Services {
         public class LocalIOWrapper : IOWrapper {
+
+                private const int DefaultBufferSize = 2048;
+
                 internal LocalIOWrapper(WebSocket socket, CancellationTokenSource local) {
                         Channel = socket;
                         LocalToken = local;
@@ -34,11 +37,16 @@ namespace Eso.API.Services {
                 internal async Task<string> Receive(bool promptRemote = true) {
                         if (promptRemote)
                                 await Send("\t");
-                        var buffer = new byte[2048];
-                        var response = await Channel.ReceiveAsync(new ArraySegment<byte>(buffer), LocalToken.Token);
-                        // TODO: Detect closure here. Need to rmq
-                        // TODO: Ensure complete message is received
-                        return Encoding.ASCII.GetString(buffer, 0, response.Count);
+                        var result = string.Empty;
+                        WebSocketReceiveResult response;
+                        do {
+                                var buffer = new byte[DefaultBufferSize];
+                                response = await Channel.ReceiveAsync(new ArraySegment<byte>(buffer), LocalToken.Token);
+                                // TODO: Detect closure here. Need to rmq
+                                if (response.Count > 0)
+                                        result = $"{result}{Encoding.ASCII.GetString(buffer, 0, response.Count)}";
+                        } while (!response.EndOfMessage);
+                        return result;
                 }
         }
 }
