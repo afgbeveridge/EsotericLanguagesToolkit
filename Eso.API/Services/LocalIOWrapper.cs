@@ -39,9 +39,10 @@ namespace Eso.API.Services {
                                 await Send("\t");
                         var result = string.Empty;
                         WebSocketReceiveResult response;
+                        var buffer = new byte[DefaultBufferSize];
+                        var seg = new ArraySegment<byte>(buffer);
                         do {
-                                var buffer = new byte[DefaultBufferSize];
-                                response = await Channel.ReceiveAsync(new ArraySegment<byte>(buffer), LocalToken.Token);
+                                response = await Channel.ReceiveAsync(seg, LocalToken.Token);
                                 // TODO: Detect closure here. Need to rmq
                                 if (response.Count > 0)
                                         result = $"{result}{Encoding.ASCII.GetString(buffer, 0, response.Count)}";
