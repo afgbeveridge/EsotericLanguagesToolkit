@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		esolang-entry.txt = esolang-entry.txt
 		EsotericInterpreters.vsmdi = EsotericInterpreters.vsmdi
 		Local.testsettings = Local.testsettings
+		mysql.seed.csv = mysql.seed.csv
 		rabbit_definitions.json = rabbit_definitions.json
 		README.md = README.md
 		Setup.ps1 = Setup.ps1

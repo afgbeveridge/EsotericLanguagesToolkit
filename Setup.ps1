@@ -1,25 +1,25 @@
 ﻿
 Write-Output "Esoteric language toolkit installer"
 
-function Wait-For-Port([Int] $port, [Int] $awp) { 
+function Wait-For-Condition($desc, $test, [Int] $awp = 0, [Int] $maxAttempts = 13, [Int] $sleepWait = 5) { 
     $open = $false
     $attempts = 1
-    Write-Output "Check for accessible port $port...." 
+    Write-Output "Check for condition $desc....up to $maxAttempts attempts" 
     do { 
-        $open = (Test-NetConnection -ComputerName localhost -Port $port | Where-Object TcpTestSucceeded) -ne $null
+        $open = & $test
         if ($open -eq $true) {
-            Write-Output "Port $port seems open...." 
+            Write-Output "Condition $desc satisfied...." 
         }
         else {
-            Write-Output "Attempt $attempts - waiting for port $port...." 
-            Start-Sleep -s 5
+            Write-Output "Attempt $attempts - waiting $sleepWait seconds...." 
+            Start-Sleep -s $sleepWait
         }
         $attempts++
-    } while ($open -eq $false -and $attempts -lt 13)
+    } while ($open -eq $false -and $attempts -lt $maxAttempts)
     if ($open -eq $false) { 
-        throw "Port $port is required to be open but is not"
+        throw "Condition $desc not satisfied, cannot continue"
     }
-    else { 
+    elseif ($awp -gt 0) { 
         Write-Output "Additional wait period of $awp requested...." 
         Start-Sleep -s $awp
     }
@@ -80,6 +80,7 @@ function Generic-Container-Operation([String] $imageName, [String] $containerNam
 
 function MySql-Container-Creator { 
     docker run -d -p 3306:3306 --name elt-eso-mysql -e MYSQL_ROOT_PASSWORD=pass123 -d mysql:latest
+    Wait-For-Condition "MySql up" { (docker exec elt-eso-mysql sh -c "mysqladmin  -u root --password=pass123 ping 2>&1" | Select-String alive) -ne $null } -sleepWait 30
 }
 
 function RabbitMQ-Creator { 
@@ -87,11 +88,23 @@ function RabbitMQ-Creator {
     Write-Output "Create queues and bindings...."
     docker cp rabbit_definitions.json elt-local-rabbit:/rabbit_definitions.json
     Write-Output "Wait for RabbitMQ to spin up...."
-    Wait-For-Port 15672 45
+    Wait-For-Condition "Rabbit port open" { (Test-NetConnection -ComputerName localhost -Port 15672 | Where-Object TcpTestSucceeded) -ne $null }
+    Wait-For-Condition "Rabbit up" { docker exec -ti elt-local-rabbit sh -c "rabbitmqctl status"; Write-Output "$($LASTEXITCODE -eq 0)" }
     docker exec -ti elt-local-rabbit sh -c "rabbitmqadmin import rabbit_definitions.json"
+}
+
+function Mongo-Container-Creator { 
+    docker volume create --name=eltmongodata
+    docker run -p 27017:27017 --name elt-eso-mongo -v eltmongodata:/data/db -d mongo:latest
+}
+
+function Add-EF-Artefacts { 
+    dotnet tool install --global dotnet-ef
+    dotnet ef database update --project Eso.API.Editor 
 }
 
 #Build-Solution
 #Publish-Solution
-Generic-Container-Operation rabbitmq elt-local-rabbit "RabbitMQ-Creator"
-Generic-Container-Operation mysql elt-eso-mysql "MySql-Container-Creator"
+Generic-Container-Operation rabbitmq elt-local-rabbit { RabbitMQ-Creator }
+Generic-Container-Operation mysql elt-eso-mysql { MySql-Container-Creator }
+#Generic-Container-Operation mongo elt-eso-mongo { Mongo-Container-Creator }
