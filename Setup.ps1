@@ -79,7 +79,7 @@ function Generic-Container-Operation([String] $imageName, [String] $containerNam
 }
 
 function MySql-Container-Creator { 
-    docker run -d -p 3306:3306 --name elt-eso-mysql -e MYSQL_ROOT_PASSWORD=pass123 -d mysql:latest
+    docker run -d -p 3306:3306 --name elt-eso-mysql -e MYSQL_ROOT_PASSWORD=pass123 -d mysql:latest --secure-file-priv=
     Wait-For-Condition "MySql up" { (docker exec elt-eso-mysql sh -c "mysqladmin  -u root --password=pass123 ping 2>&1" | Select-String alive) -ne $null } -sleepWait 30
 }
 
@@ -103,8 +103,14 @@ function Add-EF-Artefacts {
     dotnet ef database update --project Eso.API.Editor 
 }
 
-#Build-Solution
-#Publish-Solution
+function MySql-Seed { 
+    docker cp Languages.csv elt-eso-mysql:/Languages.csv
+    docker cp mysql.init.sql elt-eso-mysql:/mysql.init.sql
+    docker exec -it elt-eso-mysql sh -c "mysql -u root --password=pass123 esoteric_languages < mysql.init.sql"
+}
+
 Generic-Container-Operation rabbitmq elt-local-rabbit { RabbitMQ-Creator }
-Generic-Container-Operation mysql elt-eso-mysql { MySql-Container-Creator }
-#Generic-Container-Operation mongo elt-eso-mongo { Mongo-Container-Creator }
+Generic-Container-Operation mysql elt-eso-mysql { MySql-Container-Creator; Add-EF-Artefacts; MySql-Seed }
+Generic-Container-Operation mongo elt-eso-mongo { Mongo-Container-Creator }
+Build-Solution
+Publish-Solution

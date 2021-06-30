@@ -21,7 +21,7 @@ pip install -r requirements. txt
 Set up mongodb, called EsoStatistics, one collection, Raw
 statistics-env -- activate.bat
 sanic stats.app in cmd window
-Start celery worker ==  celery -A async_statistics worker --loglevel=info
+Start celery worker ==  celery -A async_statistics worker --loglevel=infomy
 
 EF core
 Add-Migration -StartupProject Eso.API.Editor DBInit
