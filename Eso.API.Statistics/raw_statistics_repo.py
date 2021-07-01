@@ -59,9 +59,9 @@ class RawStatisticsRepository():
         d = {}
         queryable_title_tag = ''.join([tag for tag in tags])
         readable_title_tag = ''.join([tag.title() for tag in tags])
-        d['mean{}'.format(readable_title_tag)] = df[queryable_title_tag].mean()
-        d['min{}'.format(readable_title_tag)] = df[queryable_title_tag].min()
-        d['max{}'.format(readable_title_tag)] = df[queryable_title_tag].max()
+        d['mean{}'.format(readable_title_tag)] = df[queryable_title_tag].mean().item()
+        d['min{}'.format(readable_title_tag)] = df[queryable_title_tag].min().item()
+        d['max{}'.format(readable_title_tag)] = df[queryable_title_tag].max().item()
         print(d)
         return d
 

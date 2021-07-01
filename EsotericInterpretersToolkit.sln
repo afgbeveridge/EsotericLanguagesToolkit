@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6A8D1DAE-FEAA-48E2-99F2-D4CC6231B263}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		3386.ps1 = 3386.ps1
 		Clean.ps1 = Clean.ps1
 		esolang-entry.txt = esolang-entry.txt
 		EsotericInterpreters.vsmdi = EsotericInterpreters.vsmdi

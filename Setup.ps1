@@ -1,17 +1,19 @@
 ﻿
-Write-Output "Esoteric language toolkit installer"
+Write-Host "Esoteric language toolkit installer"
+. ./3386.ps1
+$WriteHostAutoIndent = $true
 
 function Wait-For-Condition($desc, $test, [Int] $awp = 0, [Int] $maxAttempts = 13, [Int] $sleepWait = 5) { 
     $open = $false
     $attempts = 1
-    Write-Output "Check for condition $desc....up to $maxAttempts attempts" 
+    Write-Host "Check for condition $desc....up to $maxAttempts attempts" 
     do { 
         $open = & $test
         if ($open -eq $true) {
-            Write-Output "Condition $desc satisfied...." 
+            Write-Host "Condition $desc satisfied...." 
         }
         else {
-            Write-Output "Attempt $attempts - waiting $sleepWait seconds...." 
+            Write-Host "Attempt $attempts - waiting $sleepWait seconds...." 
             Start-Sleep -s $sleepWait
         }
         $attempts++
@@ -20,18 +22,18 @@ function Wait-For-Condition($desc, $test, [Int] $awp = 0, [Int] $maxAttempts = 1
         throw "Condition $desc not satisfied, cannot continue"
     }
     elseif ($awp -gt 0) { 
-        Write-Output "Additional wait period of $awp requested...." 
+        Write-Host "Additional wait period of $awp requested...." 
         Start-Sleep -s $awp
     }
 }
 
 function Build-Solution {
-    Write-Output "Building solution...."
+    Write-Host "Building solution...."
     dotnet build
 }
 
 function Publish-Solution {
-    Write-Output "Publishing solution...."
+    Write-Host "Publishing solution...."
     dotnet publish
 }
 
@@ -58,23 +60,23 @@ function Find-Image([String] $imageName) {
 
 
 function Generic-Container-Operation([String] $imageName, [String] $containerName, $creator) { 
-    Write-Output "$imageName checks...."
+    Write-Host "$imageName checks...."
     $exists, $running = Find-Container($containerName)
     if ($exists -eq $false) { 
         $imageAlready = Find-Image $imageName
         if ($imageAlready -eq $false) { 
-            Write-Output "Pull $imageName image...."
+            Write-Host "Pull $imageName image...."
             docker pull $imageName
         }
-        Write-Output "Create $imageName container...."
+        Write-Host "Create $imageName container...."
         & $creator
     }
     elseif ($running -eq $false) { 
-        Write-Output "Start existing container...."
+        Write-Host "Start existing container...."
         docker start $containerName
     }
     else { 
-        Write-Output "Container appears to be running...."
+        Write-Host "Container appears to be running...."
     }
 }
 
@@ -85,9 +87,9 @@ function MySql-Container-Creator {
 
 function RabbitMQ-Creator { 
     docker run -d -p 15672:15672 -p 5672:5672 --hostname elt-local-rabbit --name elt-local-rabbit rabbitmq:3-management
-    Write-Output "Create queues and bindings...."
+    Write-Host "Create queues and bindings...."
     docker cp rabbit_definitions.json elt-local-rabbit:/rabbit_definitions.json
-    Write-Output "Wait for RabbitMQ to spin up...."
+    Write-Host "Wait for RabbitMQ to spin up...."
     Wait-For-Condition "Rabbit port open" { (Test-NetConnection -ComputerName localhost -Port 15672 | Where-Object TcpTestSucceeded) -ne $null }
     Wait-For-Condition "Rabbit up" { docker exec -ti elt-local-rabbit sh -c "rabbitmqctl status"; Write-Output "$($LASTEXITCODE -eq 0)" }
     docker exec -ti elt-local-rabbit sh -c "rabbitmqadmin import rabbit_definitions.json"
