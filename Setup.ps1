@@ -3,6 +3,13 @@ Write-Host "Esoteric language toolkit installer"
 . ./3386.ps1
 $WriteHostAutoIndent = $true
 
+function Check-PreConditions { 
+    docker -v 2>&1 > $null
+    if ($? -ne $true) { 
+        throw "Pre-conditions check failed. Local docker not found or not running...."
+    }
+}
+
 function Wait-For-Condition($desc, $test, [Int] $awp = 0, [Int] $maxAttempts = 13, [Int] $sleepWait = 5) { 
     $open = $false
     $attempts = 1
@@ -111,6 +118,7 @@ function MySql-Seed {
     docker exec -it elt-eso-mysql sh -c "mysql -u root --password=pass123 esoteric_languages < mysql.init.sql"
 }
 
+Check-PreConditions
 Generic-Container-Operation rabbitmq elt-local-rabbit { RabbitMQ-Creator }
 Generic-Container-Operation mysql elt-eso-mysql { MySql-Container-Creator; Add-EF-Artefacts; MySql-Seed }
 Generic-Container-Operation mongo elt-eso-mongo { Mongo-Container-Creator }
