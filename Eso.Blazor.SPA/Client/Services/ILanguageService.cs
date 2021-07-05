@@ -25,5 +25,7 @@ namespace Eso.Blazor.SPA.Client.Services {
                 Task<LanguageCommand[]> Commands();
 
                 Task<HttpResponseMessage> Save(Language l);
+
+                Task<string> Documentation();
         }
 }

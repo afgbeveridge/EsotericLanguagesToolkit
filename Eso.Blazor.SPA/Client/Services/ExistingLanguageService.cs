@@ -1,6 +1,4 @@
 ﻿using Eso.API.Editor.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -19,6 +17,8 @@ namespace Eso.Blazor.SPA.Client.Services {
 
                 public async Task<HttpResponseMessage> Save(Language l) =>
                         await Client.PutAsJsonAsync($"EsotericLanguageEditor/languages/{l.Name}", l);
+
+                public Task<string> Documentation() => Task.FromResult(string.Empty);
 
         }
 }

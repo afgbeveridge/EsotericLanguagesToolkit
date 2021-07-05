@@ -1,0 +1,42 @@
+﻿@using Markdig;
+@using Eso.Blazor.SPA.Client.Services;
+@inject HttpClient Http
+@inject IEnumerable<ILanguageService> LanguageServices
+
+<Heading Size="HeadingSize.Is2" Alignment="TextAlignment.Center">@Language</Heading>
+
+@if (!PreviewDisplay) {
+        <Field>
+                <FieldLabel ColumnSize="ColumnSize.Is2">Raw documentation</FieldLabel>
+                <MemoEdit Rows="10" @bind-Text="@Body" />
+        </Field>
+}
+else {
+        @((MarkupString)Preview)
+}
+<Paragraph Alignment="TextAlignment.Center">
+        <Button Color="Color.Primary" Clicked="TogglePreview">Toggle</Button>
+</Paragraph>
+
+@code {
+        [Parameter]
+        public string Language { get; set; }
+
+        public string Body { get; set; }
+
+        public string Preview => Markdown.ToHtml(Body ?? string.Empty, Pipeline);
+
+        private MarkdownPipeline Pipeline { get; } = new Markdig.MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+
+        private ILanguageService LanguageService;
+
+        private bool PreviewDisplay { get; set; }
+
+        protected override async Task OnParametersSetAsync() {
+                LanguageService = LanguageServices.First(s => !s.UnderstandsEditing);
+                LanguageService.Using(Http).ForLanguage(Language);
+                Body = await LanguageService.Documentation();
+        }
+
+        private void TogglePreview() => PreviewDisplay = !PreviewDisplay;
+}

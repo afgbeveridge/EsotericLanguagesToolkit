@@ -1,3 +1,16 @@
 ﻿@page "/new-language"
 
-<LanguageEditor Mode="new"></LanguageEditor>
+        <Tabs SelectedTab="edit">
+                <Items>
+                        <Tab Name="edit">Mappings</Tab>
+                        <Tab Name="documentation">Documentation</Tab>
+                </Items>
+                <Content>
+                        <TabPanel Name="edit">
+                                <LanguageEditor Mode="new"></LanguageEditor>
+                        </TabPanel>
+                        <TabPanel Name="documentation">
+                                <LanguageDocumentation Language="_"></LanguageDocumentation>
+                        </TabPanel>
+                </Content>
+        </Tabs>

@@ -48,6 +48,9 @@ namespace Eso.API.Editor.Controllers {
                                         Nature = FindAttribute(kvp.Key)?.Nature.ToString() ?? string.Empty
                                 });
 
+                [HttpGet("languages/example/documentation")]
+                public IActionResult GetDocTemplate() => new FileStreamResult(System.IO.File.OpenRead("DocTemplate.md"), "application/markdown");
+
                 private void CreateAcceptablePayload(Language l) {
                         l.Commands
                                 .ToList()
