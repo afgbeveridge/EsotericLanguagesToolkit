@@ -28,8 +28,8 @@ You must have:
 
 Set up has only been tested on Windows 10 Pro. 
 
-To configure: Execute the PS script Setup.ps1
-To run: Execute the PS script Run.ps1
+* To configure: Execute the PS script Setup.ps1
+* To run: Execute the PS script Run.ps1
 
 # Microcosm
 Note that this project is also a microcosm of microservices (if you will).
