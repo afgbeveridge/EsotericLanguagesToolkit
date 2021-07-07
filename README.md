@@ -21,7 +21,15 @@ Please be aware that this software is released under an MIT license.
 
 # Set up
 
-See setup.txt for environment details.
+You must have:
+* VS 2019 installed
+* Docker installed
+* Docker configured to run Linux containers
+
+Set up has only been tested on Windows 10 Pro. 
+
+To configure: Execute the PS script Setup.ps1
+To run: Execute the PS script Run.ps1
 
 # Microcosm
 Note that this project is also a microcosm of microservices (if you will).
