@@ -11,6 +11,7 @@
         <Items>
                 <Tab Name="execute">Execution</Tab>
                 <Tab Name="statistics">Statistics</Tab>
+                <Tab Name="examples">Example Programs</Tab>
         </Items>
         <Content>
                 <TabPanel Name="execute">
@@ -46,6 +47,16 @@
                 <TabPanel Name="statistics">
                         <LanguageStatisics Language="@Language"></LanguageStatisics>
                 </TabPanel>
+                <TabPanel Name="examples">
+                        @if (ExamplePrograms != null) {
+                                @foreach (var item in ExamplePrograms) {
+                                                <Field>
+                                                        <FieldLabel ColumnSize="ColumnSize.Is2">@item.Description</FieldLabel>
+                                                        @item.Context
+                                                </Field>
+                                }
+                        }
+                </TabPanel>
         </Content>
 </Tabs>
 
@@ -57,6 +68,7 @@
         private string Output { get; set; }
         private string ProgramInput { get; set; } = string.Empty;
         private bool InputRequired { get; set; }
+        private IEnumerable<ExampleProgram> ExamplePrograms { get; set; }
 
         public string SourceCode { get; set; }
 
@@ -101,6 +113,7 @@
                         var svc = LanguageServices.First(s => s.UnderstandsEditing);
                         svc.Using(Http).ForLanguage(Language);
                         Commands = (await svc.Commands()).ToDictionary(c => c.Concept, c => c.Keyword);
+                        ExamplePrograms = await svc.Examples();
                 }
         }
 

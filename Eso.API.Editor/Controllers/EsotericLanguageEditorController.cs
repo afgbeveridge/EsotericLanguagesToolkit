@@ -8,6 +8,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Eso.API.Editor.Repos;
 using System.Threading.Tasks;
+using Eso.API.Editor.Services;
 
 namespace Eso.API.Editor.Controllers {
 
@@ -17,7 +18,12 @@ namespace Eso.API.Editor.Controllers {
 
                 private IEsoLangRepository Repo { get; }
 
-                public EsotericLanguageEditorController(IEsoLangRepository repo) => Repo = repo;
+                private IExampleGenerator Generator { get; }
+
+                public EsotericLanguageEditorController(IEsoLangRepository repo, IExampleGenerator generator) {
+                        Repo = repo;
+                        Generator = generator;
+                }
 
                 [HttpGet("languages")]
                 public IEnumerable<object> GetAllKnownLanguages() => Repo.All.Select(l => new { Name = l.Name }).OrderBy(a => a.Name);
@@ -49,7 +55,11 @@ namespace Eso.API.Editor.Controllers {
                                 });
 
                 [HttpGet("languages/example/documentation")]
-                public IActionResult GetDocTemplate() => new FileStreamResult(System.IO.File.OpenRead("DocTemplate.md"), "application/markdown");
+                public IActionResult GetDocTemplate() => new FileStreamResult(System.IO.File.OpenRead("Templates/DocTemplate.md"), "application/markdown");
+
+                [HttpGet("languages/example/programs")]
+                public IEnumerable<ExampleProgram> GetExamplePrograms([FromQuery] string language) => 
+                        Generator.ProcessTemplates(language, new[] { @"Templates\HelloWorld.txt", @"Templates\ReverseString.txt" });
 
                 private void CreateAcceptablePayload(Language l) {
                         l.Commands

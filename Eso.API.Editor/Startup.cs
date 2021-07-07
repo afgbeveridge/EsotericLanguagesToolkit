@@ -1,4 +1,5 @@
 using Eso.API.Editor.Repos;
+using Eso.API.Editor.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,7 @@ namespace Eso.API.Editor {
                         services.AddDbContextPool<EditorDBContext>(options => options.UseMySql(conn, ServerVersion.AutoDetect(conn)))
                                 .AddControllers();
                         services.AddScoped<IEsoLangRepository, EsoLangRepository>();
+                        services.AddScoped<IExampleGenerator, ExampleGenerator>();
                 }
 
                 // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

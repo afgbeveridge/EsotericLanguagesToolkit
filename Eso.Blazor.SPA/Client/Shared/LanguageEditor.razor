@@ -4,6 +4,8 @@
 @using Blazorise.Components;
 @using Blazorise.Snackbar;
 @using Eso.Blazor.SPA.Client.Services;
+@using Eso.Blazor.SPA.Client.Models;
+@inject AppState State
 @inject HttpClient Http
 @inject IEnumerable<ILanguageService> LanguageServices
 
@@ -102,7 +104,7 @@ else {
         Dictionary<string, Wrapper> selectedValues;
         private string languageName;
 
-        protected override async Task OnParametersSetAsync() {
+        protected override async Task OnInitializedAsync() {
                 if (string.IsNullOrWhiteSpace(Mode)) {
                         availableCommandsGroups = null;
                 }
@@ -145,6 +147,7 @@ else {
                                 var l = CreateLanguage();
                                 var response = await LanguageService.Save(l);
                                 response.EnsureSuccessStatusCode();
+                                State.CurrentLanguage = l;
                                 await OnUserAction.InvokeAsync(true);
                         }
                         catch (Exception ex) {

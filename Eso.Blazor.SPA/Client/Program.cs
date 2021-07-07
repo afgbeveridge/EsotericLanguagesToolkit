@@ -1,15 +1,12 @@
 using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
+using Eso.Blazor.SPA.Client.Models;
 using Eso.Blazor.SPA.Client.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Eso.Blazor.SPA.Client {
@@ -31,6 +28,7 @@ namespace Eso.Blazor.SPA.Client {
                         builder.Services.AddHttpClient<StatisticsServiceClient>(client => client.BaseAddress = new Uri(builder.Configuration["StatisticsUrl"]));
                         builder.Services.AddScoped<ILanguageService, NewLanguageService>();
                         builder.Services.AddScoped<ILanguageService, ExistingLanguageService>();
+                        builder.Services.AddSingleton<AppState>();
 
                         // await builder.Build().RunAsync();
 

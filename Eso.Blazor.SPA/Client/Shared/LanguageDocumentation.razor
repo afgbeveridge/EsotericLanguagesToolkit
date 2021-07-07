@@ -1,6 +1,8 @@
 ﻿@using Markdig;
 @using Eso.Blazor.SPA.Client.Services;
+@using Eso.Blazor.SPA.Client.Models;
 @inject HttpClient Http
+@inject AppState State
 @inject IEnumerable<ILanguageService> LanguageServices
 
 <Heading Size="HeadingSize.Is2" Alignment="TextAlignment.Center">@Language</Heading>
@@ -35,7 +37,13 @@ else {
         protected override async Task OnParametersSetAsync() {
                 LanguageService = LanguageServices.First(s => !s.UnderstandsEditing);
                 LanguageService.Using(Http).ForLanguage(Language);
+        }
+
+        public async Task UpdateAsync() {
                 Body = await LanguageService.Documentation();
+                if (State.CurrentLanguage != null) {
+                        Console.WriteLine("Update documentation");
+                }
         }
 
         private void TogglePreview() => PreviewDisplay = !PreviewDisplay;

@@ -63,3 +63,12 @@ create table language_command(
         REFERENCES language (id)
         ON UPDATE RESTRICT ON DELETE CASCADE
 );
+
+
+Misc
+====
+
+Command markup is 
+  %%KnownConcept.Key%% e.g %%Push%%
+  __User__ -- entered user name
+  __Name__ -- language name

@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
+using System.Collections.Generic;
 
 namespace Eso.Blazor.SPA.Client.Services {
         public interface ILanguageService {
@@ -27,5 +28,7 @@ namespace Eso.Blazor.SPA.Client.Services {
                 Task<HttpResponseMessage> Save(Language l);
 
                 Task<string> Documentation();
+
+                Task<IEnumerable<ExampleProgram>> Examples();
         }
 }
