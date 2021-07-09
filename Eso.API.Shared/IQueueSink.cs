@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
-namespace Eso.API.Services {
+namespace Eso.API.Shared {
         public interface IQueueSink {
                 IQueueSink UsingConfiguration(IConfiguration cfg, string name = null);
 

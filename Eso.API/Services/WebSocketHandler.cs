@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using System.Text.Json;
 using System.Diagnostics;
 using Eso.API.Models;
+using Eso.API.Shared;
 
 namespace Eso.API.Services {
         public class WebSocketHandler : IWebSocketHandler {

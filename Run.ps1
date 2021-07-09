@@ -16,6 +16,8 @@ Start-ELT-Job "ELT Execution API" .\Eso.API "dotnet run Eso.API.Execution.csproj
 Write-Host "Allow processes to start"
 Start-Sleep -s 20
 Start-ELT-Job "ELT Blazor Client" .\Eso.Blazor.SPA\Client "dotnet run Eso.Blazor.SPA.Client.csproj"
+Write-Host "Allow processes to start"
+Start-Sleep -s 10
 Write-Host "Start default browser on Blazor client port"
 Start-Process "http://localhost:27000"
 Read-Host "Press ENTER to end all processes ($($processes.Count) to end)"

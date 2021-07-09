@@ -4,7 +4,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eso.API.Services {
+namespace Eso.API.Shared {
         public class RabbitMQSink : IQueueSink {
 
                 private const string DefaultQueueSectionName = "RabbitMq";

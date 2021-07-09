@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
     <PackageReference Include="System.Composition.Convention" Version="1.4.1" />
     <PackageReference Include="System.Composition.Hosting" Version="1.4.1" />
@@ -16,6 +15,7 @@
     <ProjectReference Include="..\Befunge-93.Language\Befunge-93.Language.csproj" />
     <ProjectReference Include="..\BrainFuck.Language\BrainFuck.Language.csproj" />
     <ProjectReference Include="..\Deadfish.Language\Deadfish.Language.csproj" />
+    <ProjectReference Include="..\Eso.API.Shared\Eso.API.Shared.csproj" />
     <ProjectReference Include="..\Generalized.Interpreter\Generalized.Interpreter.csproj" />
     <ProjectReference Include="..\WARP.Language\WARP.Language.csproj" />
   </ItemGroup>

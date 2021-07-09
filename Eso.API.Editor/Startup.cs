@@ -1,5 +1,6 @@
 using Eso.API.Editor.Repos;
 using Eso.API.Editor.Services;
+using Eso.API.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,7 @@ namespace Eso.API.Editor {
                                 .AddControllers();
                         services.AddScoped<IEsoLangRepository, EsoLangRepository>();
                         services.AddScoped<IExampleGenerator, ExampleGenerator>();
+                        services.AddSingleton<IQueueSink, RabbitMQSink>();
                 }
 
                 // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

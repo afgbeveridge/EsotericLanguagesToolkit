@@ -25,7 +25,7 @@ namespace Eso.API.Editor.Services {
                         var all = content.Select(s => {
                                 return Regex.Replace(s, ConceptMarkerRegex, m => {
                                         var match = m.Captures[0].Value;
-                                        return cmds[match.Substring(2, match.Length -4)];
+                                        return cmds[match.Substring(2, match.Length - 4)];
                                 });
                         });
                         return new ExampleProgram { Context = string.Join(string.Empty, all), Description = name };

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Eso.API.Editor.Models\Eso.API.Editor.Models.csproj" />
+    <ProjectReference Include="..\Eso.API.Shared\Eso.API.Shared.csproj" />
     <ProjectReference Include="..\Eso.Blazor.SPA\Shared\Eso.Blazor.SPA.Shared.csproj" />
     <ProjectReference Include="..\General.Language\General.Language.csproj" />
   </ItemGroup>

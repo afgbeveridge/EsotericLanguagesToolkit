@@ -1,18 +1,31 @@
 ﻿using Eso.API.Editor.Models;
+using Eso.API.Shared;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq.Expressions;
+using System.Text.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace Eso.API.Editor.Repos {
 
         public class EsoLangRepository : IEsoLangRepository {
 
+                private const string QueueName = "LangUpdate";
+
                 private EditorDBContext Context { get; }
 
-                public EsoLangRepository(EditorDBContext ctx) => Context = ctx;
+                private IQueueSink Sink { get; }
+
+                private IConfiguration Config { get; }
+
+                public EsoLangRepository(EditorDBContext ctx, IQueueSink sink, IConfiguration cfg) {
+                        Context = ctx;
+                        Sink = sink;
+                        Config = cfg;
+                }
 
                 public IEnumerable<Language> All => Context.Languages;
 
@@ -35,6 +48,7 @@ namespace Eso.API.Editor.Repos {
                         language.Commands.ToList().ForEach(c => c.Id = 0);
                         l.Commands = language.Commands;
                         await Context.SaveChangesAsync();
+                        await NotifyUpdateOrAddition(l, true);
                         return l;
                 }
 
@@ -45,12 +59,26 @@ namespace Eso.API.Editor.Repos {
                                 l => l.Hash == lang.Hash || lang.Name == l.Name);
                         Context.Languages.Add(lang);
                         await Context.SaveChangesAsync();
+                        await NotifyUpdateOrAddition(lang);
                 }
 
                 private void CheckHash(Language lang, string msg, Expression<Func<Language, bool>> test) {
                         lang.Hash = lang.CalculateHash();
                         if (Context.Languages.Any(test))
-                                throw new ApplicationException($"Language {lang.Name} already exists or has an identical lexicon to another language");
+                                throw new ApplicationException(msg);
+                }
+
+                private async Task NotifyUpdateOrAddition(Language language, bool update = false) {
+                        var payload = new  {
+                                Name = language.Name,
+                                Url = "Unknown",
+                                Turing_complete = true,
+                                IsCustom = true
+                                
+                        };
+                        // Note camel case property name
+                        var body = JsonSerializer.Serialize(payload, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+                        await Sink.UsingConfiguration(Config).PublishToQueueAsync(QueueName, body);
                 }
         }
 }
