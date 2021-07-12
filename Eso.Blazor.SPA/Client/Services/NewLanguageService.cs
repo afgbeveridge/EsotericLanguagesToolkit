@@ -17,7 +17,7 @@ namespace Eso.Blazor.SPA.Client.Services {
                 public async Task<HttpResponseMessage> Save(Language l) =>
                         await Client.PostAsJsonAsync("EsotericLanguageEditor/languages", l);
 
-                public async Task<string> Documentation() => await Client.GetStringAsync("EsotericLanguageEditor/languages/example/documentation");
+                public async Task<string> Documentation(string name) => await Client.GetStringAsync($"EsotericLanguageEditor/languages/example/documentation?language={name}");
 
                 public Task<IEnumerable<ExampleProgram>> Examples() => Task.FromResult(default(IEnumerable<ExampleProgram>));
 

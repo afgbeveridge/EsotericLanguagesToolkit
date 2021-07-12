@@ -4,14 +4,16 @@ using Eso.API.Editor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Eso.API.Editor.Migrations
 {
     [DbContext(typeof(EditorDBContext))]
-    partial class EditorDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210712014240_DocumentationSupport")]
+    partial class DocumentationSupport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

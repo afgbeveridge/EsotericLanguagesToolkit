@@ -40,10 +40,8 @@ else {
         }
 
         public async Task UpdateAsync() {
-                Body = await LanguageService.Documentation();
-                if (State.CurrentLanguage != null) {
-                        Console.WriteLine("Update documentation");
-                }
+                Language = State.CurrentLanguage?.Name ?? Language;
+                Body = await LanguageService.Documentation(Language);
         }
 
         private void TogglePreview() => PreviewDisplay = !PreviewDisplay;

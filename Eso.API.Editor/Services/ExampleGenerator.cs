@@ -17,7 +17,7 @@ namespace Eso.API.Editor.Services {
                 public IEnumerable<ExampleProgram> ProcessTemplates(string language, IEnumerable<string> paths) => 
                         paths.Select(p => ProcessTemplate(language, Path.GetFileNameWithoutExtension(p), File.ReadAllLines(p)));
 
-                public string ProcessGeneralTemplate(string language, string path) => null;
+                public string ProcessGeneralTemplate(string language, string path) => ProcessTemplate(language, null, File.ReadAllLines(path)).Context;
 
                 private ExampleProgram ProcessTemplate(string language, string name, string[] content) {
                         // Get commands using repo, do subs, join with empty string

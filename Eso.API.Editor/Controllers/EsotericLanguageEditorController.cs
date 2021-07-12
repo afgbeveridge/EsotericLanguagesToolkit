@@ -1,14 +1,12 @@
 ﻿using Eso.API.Editor.Models;
+using Eso.API.Editor.Repos;
+using Eso.API.Editor.Services;
 using General.Language;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Microsoft.EntityFrameworkCore;
-using Eso.API.Editor.Repos;
 using System.Threading.Tasks;
-using Eso.API.Editor.Services;
 
 namespace Eso.API.Editor.Controllers {
 
@@ -55,7 +53,7 @@ namespace Eso.API.Editor.Controllers {
                                 });
 
                 [HttpGet("languages/example/documentation")]
-                public IActionResult GetDocTemplate() => new FileStreamResult(System.IO.File.OpenRead("Templates/DocTemplate.md"), "application/markdown");
+                public string GetDocTemplate([FromQuery] string language) => Generator.ProcessGeneralTemplate(language, @"Templates\DocTemplate.md");
 
                 [HttpGet("languages/example/programs")]
                 public IEnumerable<ExampleProgram> GetExamplePrograms([FromQuery] string language) => 

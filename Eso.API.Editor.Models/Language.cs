@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Eso.API.Editor.Models {
 
@@ -20,6 +16,8 @@ namespace Eso.API.Editor.Models {
                 public bool IsNativelySupported { get; set; }
 
                 public ICollection<LanguageCommand> Commands { get; set; }
+
+                public string Documentation { get; set; }
 
         }
 
