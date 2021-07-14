@@ -27,6 +27,7 @@ namespace Eso.API.Editor {
                                 .Property(l => l.DateCreated).IsRequired().ValueGeneratedOnAdd().HasColumnType("datetime");
                         builder.Entity<Language>()
                                 .Property(l => l.IsNativelySupported).IsRequired().HasColumnType("boolean").HasDefaultValue(false);
+                        builder.Entity<Language>().Ignore(l => l.ProcessedDocumentation);
                         return this;
                 }
 

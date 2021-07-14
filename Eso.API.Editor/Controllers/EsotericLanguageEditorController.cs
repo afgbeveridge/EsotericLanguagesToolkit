@@ -36,6 +36,7 @@ namespace Eso.API.Editor.Controllers {
 
                 [HttpPost("languages")]
                 public async Task<IActionResult> CreateLanguage([FromBody] Language lang) {
+                        lang.Documentation = System.IO.File.ReadAllText(@"Templates\DocTemplate.md");
                         await Repo.Create(lang);
                         CreateAcceptablePayload(lang);
                         return CreatedAtRoute("GetKnownLanguage", new { language = lang.Name }, lang);
@@ -53,7 +54,7 @@ namespace Eso.API.Editor.Controllers {
                                 });
 
                 [HttpGet("languages/example/documentation")]
-                public string GetDocTemplate([FromQuery] string language) => Generator.ProcessGeneralTemplate(language, @"Templates\DocTemplate.md");
+                public DocumentSet GetDocTemplate([FromQuery] string language) => Generator.ProcessGeneralTemplate(language, @"Templates\DocTemplate.md");
 
                 [HttpGet("languages/example/programs")]
                 public IEnumerable<ExampleProgram> GetExamplePrograms([FromQuery] string language) => 

@@ -19,6 +19,8 @@ namespace Eso.API.Editor.Models {
 
                 public string Documentation { get; set; }
 
+                public string ProcessedDocumentation { get; set; }
+
         }
 
 }

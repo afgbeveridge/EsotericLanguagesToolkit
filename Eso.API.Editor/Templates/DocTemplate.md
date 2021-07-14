@@ -15,7 +15,7 @@ A few general purpose operators exist.
 !Command
 !Description
 |-
-|%%Assignment%%&lt;object&gt;&lt;expr&gt;
+|%%Assignment%%&lt;object&gt;&lt;expr&gt;Radix
 |assign &lt;expr&gt; to &lt;object&gt;
 |-
 |%%Addition%%&lt;sobject&gt;&lt;expr&gt;

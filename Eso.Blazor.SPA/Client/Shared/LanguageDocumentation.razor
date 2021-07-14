@@ -10,7 +10,7 @@
 @if (!PreviewDisplay) {
         <Field>
                 <FieldLabel ColumnSize="ColumnSize.Is2">Raw documentation</FieldLabel>
-                <MemoEdit Rows="10" @bind-Text="@Body" />
+                <MemoEdit Rows="10" @bind-Text="@Body" ReadOnly="true"/>
         </Field>
 }
 else {
@@ -26,7 +26,9 @@ else {
 
         public string Body { get; set; }
 
-        public string Preview => Markdown.ToHtml(Body ?? string.Empty, Pipeline);
+        private string Processed { get; set; }
+
+        public string Preview => Markdown.ToHtml(Processed ?? string.Empty, Pipeline);
 
         private MarkdownPipeline Pipeline { get; } = new Markdig.MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
 
@@ -41,7 +43,9 @@ else {
 
         public async Task UpdateAsync() {
                 Language = State.CurrentLanguage?.Name ?? Language;
-                Body = await LanguageService.Documentation(Language);
+                var docs = await LanguageService.Documentation(Language);
+                Body = docs.Raw;
+                Processed = docs.Processed;
         }
 
         private void TogglePreview() => PreviewDisplay = !PreviewDisplay;
