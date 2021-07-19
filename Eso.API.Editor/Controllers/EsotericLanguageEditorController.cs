@@ -54,7 +54,7 @@ namespace Eso.API.Editor.Controllers {
                                 });
 
                 [HttpGet("languages/example/documentation")]
-                public DocumentSet GetDocTemplate([FromQuery] string language) => Generator.ProcessGeneralTemplate(language, @"Templates\DocTemplate.md");
+                public DocumentSet GetDocTemplate([FromQuery] string language) => Generator.ProcessGeneralTemplate(language, @"Templates\DocTemplate.md", true);
 
                 [HttpGet("languages/example/programs")]
                 public IEnumerable<ExampleProgram> GetExamplePrograms([FromQuery] string language) => 

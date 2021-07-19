@@ -1,6 +1,7 @@
 ﻿@using Markdig;
 @using Eso.Blazor.SPA.Client.Services;
 @using Eso.Blazor.SPA.Client.Models;
+@using Eso.Blazor.SPA.Shared; 
 @inject HttpClient Http
 @inject AppState State
 @inject IEnumerable<ILanguageService> LanguageServices
@@ -45,7 +46,7 @@ else {
                 Language = State.CurrentLanguage?.Name ?? Language;
                 var docs = await LanguageService.Documentation(Language);
                 Body = docs.Raw;
-                Processed = docs.Processed;
+                Processed = MarkdownConverter.ToMarkdown(docs.Processed);
         }
 
         private void TogglePreview() => PreviewDisplay = !PreviewDisplay;
