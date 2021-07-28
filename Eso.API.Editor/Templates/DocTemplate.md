@@ -59,9 +59,7 @@ There are several commands for stack manipulation.
 !Description
 |-
 |%%Treat%%&lt;object&gt;
-|treat &lt;object&gt; as the stack; takes string of content and push each atomic object onto the stack - pushed so that repeated popping and 
-
-sending to output is the same object as 'treated'
+|treat &lt;object&gt; as the stack; takes string of content and push each atomic object onto the stack - pushed so that repeated popping and sending to output is the same object as 'treated'
 |-
 |<nowiki>%%Untreat%%</nowiki>
 |untreat the current stack
